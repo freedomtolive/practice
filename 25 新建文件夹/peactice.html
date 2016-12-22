@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		    .box{
+		    	width: 80px;
+		    	float: left;
+		    	margin-right: 20px;
+		    	position: relative;
+		    }
+		    .box input{
+		    	position: absolute;
+		    	left: 10px;
+		    	top: 10px;
+		    }
+		    img{
+		    	border: none;
+		    	vertical-align: top;
+		    	width: 80px;
+		    	height: 87px;
+		    }
+		    span{
+		    	display: block;
+		    	text-align: center;
+		    }
+		    
+		</style>
+	</head>
+	<body>
+		<input type="button" value="新建文件夹" id="add" />
+		<input type="button" value="删除选中文件夹"  id="del"/>
+		<div id="content">
+			<!--<div class="box">
+				<input type="checkbox"/>
+				<img src="img/2.png" alt=""/>
+				<span>新建文件夹</span>
+			</div>
+			<div class="box">
+				<input type="checkbox"/>
+				<img src="img/2.png" alt="" />
+				<span>新建文件夹</span>
+			</div>
+			<div class="box">
+				<input type="checkbox"/>
+				<img src="img/2.png" alt="" />
+				<span>新建文件夹</span>
+			</div>-->
+		</div>
+		<script>
+			var oAdd = document.getElementById('add');
+			var oDel = document.getElementById('del');
+			var oContent = document.getElementById('content');
+			var num = 0;
+			
+			oAdd.onclick = function(ev){
+				num ++;
+				var ev = ev || event;
+				ev.cancelBubble = true;
+				var oDiv = document.createElement("div");
+				oDiv.className = 'box';
+				
+				var oInp = document.createElement("input");
+				oInp.type = 'checkbox';
+				oInp.onclick = function(ev){
+					var ev = ev || event;
+					ev.cancelBubble = true;
+					if(this.checked){
+						oImg.src = "img/2.png";
+					}else{
+						oImg.src = "img/1.png";
+					}
+				}
+				oDiv.appendChild(oInp)
+				
+				var oImg = document.createElement("img")
+				oImg.src = "img/1.png";
+				oImg.onclick = function(ev){
+					var ev = ev || event;
+					ev.cancelBubble = true;
+					oImg.src = "img/2.png";
+					oInp.checked = true;
+				}
+				oDiv.appendChild(oImg)
+				
+				var span = document.createElement("span")
+				span.innerHTML = '新建文件夹'+num;
+				
+				oDiv.appendChild(span)
+				
+				oContent.appendChild(oDiv)
+			}
+			
+			var cont_inp = content.getElementsByTagName("input");
+			
+			oDel.onclick = function(){
+				for(var i = cont_inp.length-1;i>=0;i--){
+					if(cont_inp[i].checked){
+						oContent.removeChild(cont_inp[i].parentNode)
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

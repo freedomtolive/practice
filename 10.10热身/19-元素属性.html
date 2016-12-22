@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background-color:red;
+			}
+			.box{
+				width:300px;
+				height:300px;
+				background-color:pink;
+			}
+			img{
+				width: 50px;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<div id="box" >我是div中的内容<a href="">1</a></div>-->
+		<div id="box" >
+		</div>
+		<input type="button" value="按钮" id="btn"/>
+		<input type="text" id="text1" value="你好" />
+		<a href="http://www.baidu.com" id="a1">baidu</a>
+		<img src="1.jpg" id="img1"/>
+		<!--
+			
+			元素属性
+			
+				id 
+				class =》 className
+				value
+				
+				innerHTML(可读可写)
+					标签对中包含的所有内容
+				
+				href，src(可读可写的)
+					获取到的是一个绝对路径地址
+				
+			需求：
+				点击按钮的时候弹出输入框中的值
+				
+			思路：
+				1获取btn
+				2为btn的点击事件绑定函数
+				3弹出 输入框的value
+			
+		-->
+		<script>
+			var box = document.getElementById("box");
+			var btn = document.getElementById("btn");
+			var text1 = document.getElementById("text1");
+			
+//			box.style.width = "300px";
+//			box.style.height = "300px";
+//			box.style.background = "pink";
+
+//			box.className = "box";
+			
+//			btn.value = "button";
+			
+//			alert( text1.value );
+
+//			alert( box.innerHTML );
+
+//			box.innerHTML = "你好";
+			
+			box.innerHTML = "<img src='1.jpg'/>";
+			
+			btn.onclick = function(){//点击按钮的时候
+				//弹text1的value
+				alert( text1.value );
+			}
+			
+//			var a1 = document.getElementById("a1");
+//			alert( a1.href );
+			
+			var img1 = document.getElementById("img1");
+			alert( img1.src );
+			
+		</script>
+	</body>
+</html>

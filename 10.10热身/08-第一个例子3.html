@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		    #box{
+		    	width:100px;
+		    	height:100px;
+		    	background-color:red;
+		    	transition: 3s;
+		    	transform-origin:200px 200px ;
+		    }
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮" id="inp"/>
+		<div id="box"></div>
+		<script>
+//			1获取按钮   
+//			2添加点击事件(为点击事件绑定事件处理函数)
+//			alert( document.getElementById("in") )
+			document.getElementById("inp").onclick = function(){
+//				alert( document.getElementById("box") )
+				document.getElementById("box").style.opacity = "0";
+				document.getElementById("box").style.transform = "rotate(720deg) scale(0)";
+				
+				
+			}
+		</script>
+	</body>
+</html>

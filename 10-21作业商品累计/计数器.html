@@ -1,0 +1,108 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+	<ul id="list">
+		<li>
+		  	<input type="button" value="-" />
+		    <strong>0</strong>
+		  	<input type="button" value="+" />
+		        单价：<em>12.5元</em>
+		        小计：<span>0元</span>
+	    </li>
+		<li>
+	  		<input type="button" value="-" />
+	    	<strong>0</strong>
+	  		<input type="button" value="+" />
+	    	单价：<em>10.5元</em>
+	    	小计：<span>0元</span>
+		</li>
+		<li>
+	  		<input type="button" value="-" />
+	    	<strong>0</strong>
+	  		<input type="button" value="+" />
+			单价：<em>8.5元</em>
+			小计：<span>0元</span>
+	  	</li>
+		<li>
+		  	<input type="button" value="-" />
+		    <strong>0</strong>
+		  	<input type="button" value="+" />
+			单价：<em>8元</em>
+			小计：<span>0元</span>
+		</li>
+		<li>
+		  	<input type="button" value="-" />
+		    <strong>0</strong>
+		  	<input type="button" value="+" />
+			单价：<em>14.5元</em>
+			小计：<span>0元</span>
+		</li>
+	</ul>
+	<p>
+	商品合计共：0件，共花费了：0元<br />
+	其中最贵的商品单价是：0元
+	</p>
+	
+	<script src="../../fengzhuang.js"></script>
+	<script>
+		var oList = document.getElementById('list');
+		var aLi = oList.getElementsByTagName('li');
+		var aStrong = oList.getElementsByTagName('strong');
+		var aSpan = oList.getElementsByTagName('span');
+		var aEm = oList.getElementsByTagName('em');
+		var oP = document.getElementsByTagName('p')[0];
+		
+		
+		for(var i=0;i<aLi.length;i++){
+			tab(aLi[i])
+		}
+		function tab(obj){
+			var aInp = obj.getElementsByTagName('input');
+			var oStrong = obj.getElementsByTagName('strong')[0];
+			var oSpan = obj.getElementsByTagName('span')[0];
+			var oEm = obj.getElementsByTagName('em')[0];
+			var num = 0;
+			
+			aInp[0].onclick = function(){
+				a = 0;
+				num--;
+				if(num < 0){
+					num = 0
+				}
+				oStrong.innerHTML = num;
+				oSpan.innerHTML = parseInt(oStrong.innerHTML) * parseFloat( oEm.innerHTML )+'元';
+				count();
+			}
+			
+			aInp[1].onclick = function(){
+				num++;
+				oStrong.innerHTML = num; //每点击一下计算所买的件数
+				oSpan.innerHTML = parseInt(oStrong.innerHTML) * parseFloat( oEm.innerHTML )+'元';	//计算小计
+				count();					//每点击一次计算count函数中abc的值；
+			}
+			
+			function count (){
+				var a = 0;
+				var b = 0;
+				var c = 0;
+				for(var i=0;i<aLi.length;i++){
+					a += parseInt( aStrong[i].innerHTML );	//计算件数的总和
+					b += parseFloat(aSpan[i].innerHTML);	//计算小计的总和
+					if(parseInt(aStrong[i].innerHTML) !== 0){ //如果件数aStrong[i]的件数不为0时，
+						if(parseFloat(aSpan[i].innerHTML)>c){ //如果单价aSpan[i]>c时，把aSpan的值赋给c
+							c = parseFloat(aEm[i].innerHTML)
+						}
+					}
+				}
+				oP.innerHTML = "商品合计共："+ a +"件，共花费了："+ b +"元<br />其中最贵的商品单价是："+ c +"元";
+			}
+		}
+	</script>
+</body>
+</html>

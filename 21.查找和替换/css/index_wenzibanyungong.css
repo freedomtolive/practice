@@ -1,0 +1,72 @@
+ul{
+	padding:0;
+	margin: 0;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+#box{
+	width: 800px;
+	height: 240px;
+	border: 1px solid #c0c0c0;
+	padding: 10px 10px 8px;
+	margin:100px auto;
+}
+#left{
+	float: left;
+	width: 322px;
+	height: 222px;
+	background: #efefd6;
+	border:1px dashed #000;
+	margin-right:15px;
+}
+#right{
+	float: right;
+	width: 322px;
+	height: 222px;
+	background: #63eff7;
+	border:1px dashed #000;
+}
+#center{
+	float:left;
+	width:120px;
+	height: 222px;
+}
+#button{
+	float:left;
+	width: 120px;
+	height: 40px;
+	background: #f76300;
+	font:14px/40px "微软雅黑";
+	text-align: center;
+	color:#fff;
+}
+span{
+	float:left;
+	width: 120px;
+	height: 40px;
+	font:14px/40px "微软雅黑";
+	text-align: center;
+}
+ul{
+	float:left;
+	width: 120px;
+	height: 40px;
+	display: none;
+}
+ul li{
+	float:left;
+	width: 8px;
+	height: 10px;
+	background: #e7a521;
+	margin-right:2px;
+	position:relative;
+	left:23px;
+}
+.active{
+	background:pink;
+}
+#diappear{
+	position:absolute;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width: 100px;
+				height: 100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			css 内联样式
+			
+			js 内联 
+			
+				把js写在script标签中
+				
+				优点：只要是在这个页面中就可以使用这段js
+				
+				缺点：
+				
+					1、不方便修改维护
+					
+					2、不符合规范
+		-->
+		<div id="box">第一个div</div>
+		<script>
+			document.getElementById("box").onclick = function(){
+				alert(1);
+			}
+		</script>
+	</body>
+</html>

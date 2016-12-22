@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img{
+				width: 400px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			需求：
+				点击按钮，图片切换到下一张
+				
+			思路：
+				1获取元素
+				2点击按钮的时候发生某些事情
+				3改变图片的src变成下一张
+		-->
+		<img src="img/0.jpg" id="img1"/>
+		<input type="button" value="下一张" id="btn" />
+		<script>
+		    //1获取元素
+		    var img1 = document.getElementById("img1");
+		    var btn = document.getElementById("btn");
+		    var num = 0;
+		    //2点击按钮的时候发生某些事情
+		    btn.onclick = function(){
+//		    	num = num + 1;//可以简写成下面的形式 
+		    	num += 1;
+//		    	alert( num );
+//				如果num超过4了,就是超出了,
+//					把num变成0
+				if(num > 4){//超出的时候
+//					num = 0;//把num重置为0（循环播放）
+					num = 4;
+					alert( "已经到最后一张了！" );
+				}
+				
+		    	img1.src = "img/"+num+".jpg";
+		    }
+		</script>
+	</body>
+</html>

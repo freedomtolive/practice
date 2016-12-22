@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index_wenzibanyungong.css" />
+	</head>
+	<body>
+		<div id="box">
+			<textarea id="left">妙味课堂是北京妙味趣学信息技术有限公司旗下的IT培训品牌。创办多年来我们一直恪守住IT培训的原则与底限，扎扎实实研发课程、不断提升服务质量，在公司需求和学员进度中巧妙把握平衡，帮助学员打下坚实技术基础，不断向各大IT公司输送优秀开发人才！</textarea>
+			<div id="center">
+				<a href="script:;" id="button">把文字右移</a>
+				<span>0/0</span>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div id="right"></div>
+		</div>
+		
+		<script>
+			//获取元素
+			var oBtn = document.getElementById('button');
+			var oLeft = document.getElementById('left');
+			var oRight = document.getElementById('right');
+			var oSpan = document.getElementsByTagName('span')[0];
+			var oUl = document.getElementsByTagName('ul')[0];
+			var aLi = document.getElementsByTagName('li');
+			var arr = '';
+			var Str1 = '';
+			var Str = '';
+			var timer = null;
+			var i = 0;
+			
+			//给button添加点击事件，绑定函数
+			oBtn.onclick = function(){
+				var str = '';
+				Str1 = oLeft.value;
+				timer = setInterval(function(){
+					Str = oLeft.value;
+					Str2 = Str.slice('0',1)
+					str += Str2 
+					oRight.innerHTML = str;
+					Str = Str.slice('1')
+					oLeft.value = Str;
+					
+					oSpan.innerHTML = str.length +"/"+ Str1.length
+					
+					oUl.style.display = 'block';
+					aLi[i].className = '';
+					
+					i++;
+					if(i == aLi.length){
+						i = 0;
+					}
+					
+					aLi[i].className = 'active';
+					
+					console.log(oRight.innerHTML.length);
+					if(oRight.innerHTML.length == Str1.length){
+						clearInterval(timer)
+						oUl.style.display = 'none';
+					}
+				},50)
+			}
+		</script>
+	</body>
+</html>

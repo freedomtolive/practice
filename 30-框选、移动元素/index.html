@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#list{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+				width: 330px;
+				margin: 100px auto;
+			}
+			li{
+				float: left;
+				width: 100px;
+				height: 100px;
+				background-color: pink;
+				margin: 5px;
+			}
+			.box{
+				border: 1px dotted #000;
+				position: absolute;
+				background-color: rgba(0,112,255,0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="list">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<script>
+			var list = document.getElementById("list");
+			var aLi = document.getElementsByTagName('li');
+			
+			
+			//布局转换
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].isSelected = false;
+				aLi[i].style.left = aLi[i].offsetLeft + 'px';
+				aLi[i].style.top = aLi[i].offsetTop + 'px';
+			}
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].style.position = 'absolute';
+				aLi[i].style.float = "none";
+				aLi[i].style.margin = '0';
+				drag(aLi[i])
+			}
+			
+			//多选移动操作
+			function drag(obj){
+				obj.onmousedown = function(ev){
+					var ev = ev || event;
+					obj.isSelected = true;
+					obj.style.background = "red";
+					var arr = [];//保存可移动元素
+					for(var i=0;i<aLi.length;i++){
+						if(aLi[i].isSelected){
+							arr.push(aLi[i]);
+							//将可移动元素距离鼠标的left值和top值存入数组中；
+							aLi[i].disX = aLi[i].offsetLeft - ev.clientX;
+							aLi[i].disY = aLi[i].offsetTop - ev.clientY;
+						}
+						aLi[i].isSelected
+					}
+					document.onmousemove = function(ev){
+						var ev = ev || event;
+						for(var i=0;i<arr.length;i++){
+							arr[i].style.left = ev.clientX + arr[i].disX + "px";
+							arr[i].style.top = ev.clientY + arr[i].disY + "px"; 
+							console.log(arr[i].style.left,arr[i].style.top)
+						}
+					}
+					document.onmouseup = function (){
+						document.onmousemove = document.onmouseup = null;
+						
+					}
+					
+					ev.cancelBubble = true;
+					return false;
+				}
+			}
+			
+			//框选元素
+			document.onmousedown = function(ev){
+				var ev = ev || event;
+//				
+				var oDiv = document.createElement("div");
+				oDiv.className = 'box';
+				document.body.appendChild(oDiv);
+				
+				var oriX = ev.clientX;
+				var oriY = ev.clientY;
+				
+				oDiv.style.left = oriX + 'px';
+				oDiv.style.top = oriY + 'px';
+				
+				document.onmousemove = function(ev){
+					var ev = ev || event;
+					oDiv.style.left = Math.min(ev.clientX,oriX) + 'px';
+					oDiv.style.top = Math.min(ev.clientY,oriY)+'px';
+					oDiv.style.width = Math.abs(ev.clientX - oriX)+'px';
+					oDiv.style.height = Math.abs(ev.clientY - oriY)+'px';
+				
+					//遍历所有的li，判断每个li是否被框选中
+					for(var i=0;i<aLi.length;i++){
+						if(peng(oDiv,aLi[i])){
+							aLi[i].style.background = 'red';
+							aLi[i].isSelected = true;
+						}else{
+							aLi[i].style.background = 'pink';
+							aLi[i].isSelected = false;
+						}
+					}
+				}
+				document.onmouseup = function (){
+					document.onmousemove = document.onmouseup = null;
+					document.body.removeChild(oDiv)
+				}
+			}
+			
+			//碰撞函数:判断obj1，obj2是否碰到，碰到则返回true
+			function peng(obj1,obj2){
+				var pos1 = obj1.getBoundingClientRect();
+				var pos2 = obj2.getBoundingClientRect();
+				
+				return pos1.right > pos2.left && pos1.left < pos2.right && pos1.bottom > pos2.top && pos1.top < pos2.bottom;
+			}
+		</script>
+	</body>
+</html>
+

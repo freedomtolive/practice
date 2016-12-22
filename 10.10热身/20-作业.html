@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		a{
+			text-decoration: none;
+		}
+		html {
+			height: 100%;
+		}
+		body {
+			padding-left: 20px;
+			height: 100%;
+		}
+		span {
+			display: inline-block;
+			font-size: 20px;
+			margin-top: 30px;
+			vertical-align: top;
+		}
+		#define {
+			width: 100px;
+			height: 40px;
+			text-align: center;
+			font-weight: bold;
+			line-height: 40px;
+			padding: 0px 20px;
+			border: 1px solid #000;
+			display: inline-block;
+			margin-top: 20px;
+			vertical-align: top;
+			font-size: 20px;
+			background-color: red;
+			color: #FFFFFF;
+		}
+		.div1 {
+			width: 100px;
+			height: 100px;
+			border: 5px solid #000;
+			transition: 1s;
+		}
+		.div2 {
+			width: 300px;
+			height: 200px;
+			border: 20px solid #9c949c;
+			margin:  0 auto;
+			font-size: 0px;
+			text-align: center;
+			padding-top: 16px;
+			display: none;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -160px;
+			margin-top: -110px;
+			z-index: 22;
+			background-color: #fff;
+		}
+		.div2 li {
+			display: inline-block;
+			vertical-align: top;
+			margin-bottom: 8px;
+		}
+		#box {
+			margin-top: 20px;
+		}
+		.div2 li span {
+			float: left;
+			line-height: 30px;
+			font-size: 16px;
+			margin-top: 0px;
+		}
+		.div2 li a {
+			float: left;
+			font-size: 12px;
+			width: 36px;
+			height: 32px;
+			line-height: 32px;
+			text-align: center;
+			margin-right: 5px;
+		}
+		li>a:nth-of-type(1) {
+			color: #fff;
+			background-color: #FF0000;
+		}
+		li>a:nth-of-type(2) {
+			color: #ffff00;
+			background-color: #efbd00;
+		}
+		li>a:nth-of-type(3) {
+			color: #fff;
+			background-color: #5a94ef;
+		}
+		.div2 .list>a {
+			background-color: #efefef;
+			color: #808080;
+			border: 1px solid #c0c0c0;
+			box-sizing: border-box;
+		}
+		.list2 {
+			margin-top: 12px;
+			height: 30px;
+		}
+		.div2 .list2>a {
+			float: left;
+			height: 30px;
+			width: 60px;
+			text-align: center;
+			line-height: 30px;
+			background-color: #002952;
+			color: #fff;
+		}
+		#wrap {
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0,0,0,0.3);
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<span>请为下面的DIV设置样式：</span><a id="define" href="javascript:;">点击设置</a>
+	<div class="div1" id="box"></div>
+	<div id="wrap"></div>
+	<ul class="div2" id="tc">
+		<li>
+			<span>请选择背景图片：</span>
+			<a id="red" href="javascript:;">红</a>
+			<a id="yellow" href="javascript:;">黄</a>
+			<a id="blue" href="javascript:;">蓝</a>
+		</li>
+		<li class="list">
+			<span>请选择宽度(px)：</span>
+			<a id="w2" href="javascript:;">200</a>
+			<a id="w3" href="javascript:;">300</a>
+			<a id="w4" href="javascript:;">400</a>
+		</li>
+		<li class="list">
+			<span>请选择高度(px)：</span>
+			<a id="h2" href="javascript:;">200</a>
+			<a id="h3" href="javascript:;">300</a>
+			<a id="h4" href="javascript:;">400</a>
+		</li>
+		<li class="list2">
+			<a id="resume" href="javascript:;">恢复</a>
+			<a id="fix" href="javascript:;">确认</a>
+		</li>
+	</ul>
+	<script>
+		var oDefine = document.getElementById("define");
+		var oBox = document.getElementById("box");
+		var oWrap = document.getElementById("wrap");
+		var oTc = document.getElementById("tc");
+		var oRed = document.getElementById("red");
+		var oYellow = document.getElementById("yellow");
+		var oBlue = document.getElementById("blue");
+		var oW2 = document.getElementById("w2");
+		var oW3 = document.getElementById("w3");
+		var oW4 = document.getElementById("w4");
+		var oH2 = document.getElementById("h2");
+		var oH3 = document.getElementById("h3");
+		var oH4 = document.getElementById("h4");
+		var oRemuse = document.getElementById("resume");
+		var oFix = document.getElementById("fix")
+		
+		//点击define，使wrap和tc出现
+		oDefine.onclick=function(){
+			oWrap.style.display = "block";
+			oTc.style.display = "block";
+		}
+		
+		//点击颜色，使box的颜色改变；
+		oRed.onclick = function(){
+			oBox.style.background = "red";
+		}
+		oYellow.onclick = function(){
+			oBox.style.background = "yellow";
+		}
+		oBlue.onclick = function(){
+			oBox.style.background = "blue";
+		}
+		
+		//点击宽度，改变box的宽度；
+		oW2.onclick = function(){
+			oBox.style.width = "200px";
+		}
+		oW3.onclick = function(){
+			oBox.style.width = "300px";
+		}
+		oW4.onclick = function(){
+			oBox.style.width = "400px";
+		}
+		
+		//点击高度，改变box的高度；
+		oH2.onclick = function(){
+			oBox.style.height = "200px";
+		}
+		oH3.onclick = function(){
+			oBox.style.height = "300px";
+		}
+		oH4.onclick = function(){
+			oBox.style.height = "400px";
+		}
+		
+		//点击恢复 ，使box恢复初始值
+		oRemuse.onclick = function(){
+			oBox.style.background = "white";
+			oBox.style.width = "100px";
+			oBox.style.height = "100px";
+		}
+		
+		//点击确定，使wrap和tc消失
+		oFix.onclick = function(){
+			oWrap.style.display = "none";
+			oTc.style.display = "none";
+		}
+	</script>
+</body>
+</html>

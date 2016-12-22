@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img{
+				width: 400px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img1/0.jpg" id="img1"/>
+		<input type="button" value="下一张" id="btn" />
+		<script>
+		    var img1 = document.getElementById("img1");
+		    var btn = document.getElementById("btn");
+		    var picArr = ["img1/b2.jpg","img1/a1.jpg","img1/c3.jpg","img1/d4.jpg","img1/e5.jpg"];
+		    var num = 0;
+		    //初始化
+		    img1.src = picArr[num];
+//			点击按钮做一些事情
+			btn.onclick = function(){
+//				num = num - 1;//可以简写成下面的写法
+//				num --;//num自减
+
+//				num = num + 1;//可以简写成下面的写法
+				num ++;//num自增
+				if(num == picArr.length){
+					num = 0;
+				}
+				img1.src = picArr[num];
+			}
+		</script>
+	</body>
+</html>

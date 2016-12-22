@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				margin:0;
+			}
+			ul{
+				margin:0;
+				padding:0;
+				list-style:none;
+			}
+			img{
+				border:none;
+				vertical-align: top;
+			}
+		
+			#box{
+				width:750px;
+				border: 5px solid #000;
+				margin:100px auto;
+			}
+			#left{
+				float: left;
+				width: 150px;
+			}
+			.clear:after{
+				display: block;
+				clear: both;
+				content:"";
+			}
+			#left div{
+				width:150px;
+				height:100px;
+				background-color:pink;
+				margin-bottom:10px;
+				color: #fff;
+				font-size: 25px;
+				text-align: center;
+				line-height: 100px;
+				font-weight: bold;
+			}
+			#left div:last-child{
+				margin-bottom:0;
+			}
+			#right{
+				float: left;
+				width:600px;
+				height:320px;
+			}
+			
+			#img{
+				width:600px;
+				height:220px;
+			}
+			#list{
+				width:600px;
+				/*height:100px;*/
+			}
+			#list li{
+				display: none;
+				width:600px;
+			}
+			#list li.active{
+				display: block;
+			}
+			#list .active div{
+				float:left;
+				width:200px;
+				height:100px;
+				font-size: 25px;
+				text-align: center;
+				line-height: 100px;
+				font-weight: bold;
+				background:greenyellow;
+			}
+			#box  div.actives{
+				background-color:red;
+			}
+			
+			
+		</style>
+	</head>
+		<div id="box" class="clear"></div>
+		
+	<body>
+		<script>
+			
+			var oBox = document.getElementById('box');
+			var data = [
+				[
+					"裤子",
+					[
+						"裤子-0",
+						"裤子-1",
+						"裤子-2"
+					],
+					[
+						"img/img01.jpg",
+						"img/img02.jpg",
+						"img/img03.jpg"
+					]
+				],
+				[
+					"衣服",
+					[
+						"衣服-0",
+						"衣服-1",
+						"衣服-2",
+						"衣服-3"
+					],
+					[
+						"img/img04.jpg",
+						"img/img01.jpg",
+						"img/img02.jpg",
+						"img/img03.jpg"
+					],
+				],
+				[
+					"鞋子",
+					[
+						"鞋子-0",
+						"鞋子-1"
+					],
+					[
+						"img/img04.jpg",
+						"img/img01.jpg"
+					]
+				]
+			]
+			var str = '';
+			
+			str = '<div id ="left">'
+			for(var i=0;i<data.length;i++){
+				str += '<div>'+data[i][0]+'</div>'
+			}
+			str += '</div><div id="right"><img src="img/img01.jpg" id = "img" /><ul id="list">'
+			
+			for(var i=0;i<data.length;i++){
+				str += '<li>';
+				for(var j=0;j<data[i][1].length;j++){
+					str += '<div>'+data[i][1][j]+'</div>';
+				}
+				str += '</li>'
+			};
+			
+			str += '</ul></div>'
+			
+			oBox.innerHTML = str;
+			
+			var divs = document.querySelectorAll('#left div');
+			var aDiv2 =oBox.getElementsByTagName("div");
+			var aLi = document.getElementsByTagName('li');
+			var oImg = document.getElementsByTagName('img')[0];
+			var timer = null;
+			var a = 0;
+			var b = 0;
+			
+			fn1(0,0)
+			tab();
+			function tab(){
+				timer = setInterval(function(){
+					b++;
+					if(b == data[a][1].length){
+						b=0;
+						a++;
+						if(a == divs.length){
+							a=0;
+						}
+					}
+					fn1(a,b);
+				},500)
+			}
+			//a控制左边的div，b控制右边下方的div； 控制左右div的切换
+			function fn1(a,b){
+				var aDiv = aLi[a].getElementsByTagName('div');
+				//计算li中每个div的宽度
+				for(var i=0;i<data[a][1].length;i++){
+					aDiv[i].style.width = 600/data[a][1].length+"px";
+				}
+				//清空li的class，让所有的li消失
+				for(var i = 0;i<divs.length;i++){
+					aLi[i].className = '';
+				}
+				aLi[a].className = 'active'; 
+				for(var i=0;i<aDiv2.length;i++){
+					aDiv2[i].className = '';
+				}
+				divs[a].className = 'actives';
+				aDiv[b].className = 'actives';
+				oImg.src = data[a][2][b];
+				
+				for(var i=0;i<data[a][1].length;i++){
+					aDiv[i].index = i;
+					aDiv[i].onclick = function(){
+						b=this.index;
+						fn1(a,b);
+					}
+				}
+			}
+			
+			oBox.onmouseover = function(){
+				clearInterval(timer);
+			}
+			oBox.onmouseout = function(){
+				tab();
+			}
+			for(var i=0;i<divs.length;i++){
+				divs[i].index = i;
+				divs[i].onclick = function(){
+					a = this.index;
+					b = 0;
+					fn1(a,b);
+				}
+			}
+		</script>
+	</body>
+</html>

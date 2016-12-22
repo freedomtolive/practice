@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        form {
+            margin: 10px 0;
+        }
+        td {
+            text-align: center;
+        }
+        .col1{
+        	background-color: pink;
+        }
+        .col2{
+        	background-color: yellow;
+        }
+        .sel{
+        	/*选中*/
+        	background-color: green;
+        }
+        .hover{
+        	/*移入*/
+        	background-color: orange;
+        }
+    </style>
+   
+</head>
+
+<body>
+
+<form id="form1">
+    <input type="text" name="username" value="123" />
+    <select name="sex">
+       	<option value="">请选择一个性别</option>
+        <option selected="true" value="男">男</option>
+        <option value="女">女</option>
+    </select>
+    <input type="text" name="age" value="1234"/>
+    <input type="button" value="提交" name="go">
+<p>
+    <select name="orderName">
+        <option value="">选择一个排序字段</option>
+        <option value="id">编号</option>
+        <option value="age">年龄</option>
+    </select>
+    <select name="orderBy">
+        <option value="">选择一个排序方式</option>
+        <option value="asc">升序</option>
+        <option value="desc">降序</option>
+    </select>
+    <input type="button" value="排序" id="sort">
+</p>
+</form>
+<table border="1" width="100%" id="tab1">
+    <thead>
+    <tr>
+        <th>全选 <input type="checkbox" name="checkAll" id="checkAll"></th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>年龄</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script>
+
+    /*
+    * 1.通过表单，可以添加数据到表格中显示
+    * 2.id自动根据已有的最大id值进行累加
+    * 3.隔行变色，新增加的行应该也需要隔行变色的
+    * 4.鼠标移入高亮
+    * 5.选中变色
+    * 6.全选/全不选（checkAll和下面的每一个checkbox是有关联的）
+    * 7.删除
+    * 8.上移/下移
+    * 9.选做：排序
+    * */
+	
+    var data = [
+        {
+            id: 1,
+            name : '刘伟',
+            sex : '男',
+            age : 32
+        },
+        {
+            id: 2,
+            name : '莫涛',
+            sex : '男',
+            age : 28
+        },
+        {
+            id: 3,
+            name : '小美',
+            sex : '女',
+            age : 18
+        }
+    ];
+    
+	var tBody = document.getElementById('tab1').tBodies[0];
+	var form1 = document.getElementById("form1");
+	var oCheckAll = document.getElementById('checkAll');  
+	var oSort = document.getElementById('sort')
+	var num = data.length;
+	//生成默认的图标
+	for(var i=0;i<data.length;i++){
+		creatTr(data[i])
+	};
+	changeColor();
+	
+	//点击提交时生成图表
+	form1.go.onclick = function(){
+		//判断输入框中是否有内容
+		if(form1.username == '' || form1.sex == '' || form1.age == '' ){
+			alert('请输入要添加的内容~~~');
+			return
+		}
+		//如果输入框中有内容，再添加时对应的num++，num对应tr中id的值；
+		num++;
+		//创建一行tr
+		creatTr({
+            "id": num,
+            "name" : form1.username.value,
+            "sex" : form1.sex.value,
+            "age" : form1.age.value
+		})
+		//生成tr后要重新生成颜色，避免后来添加的tr没有颜色；
+		changeColor()
+	}
+	
+	//点击全选时，如果全选为true，则所有多选框都改为true；否则都改为false
+	oCheckAll.onclick = function(){
+		var aTr = tBody.getElementsByTagName('tr');
+		
+		if(this.checked){
+			for(var i=0;i<aTr.length;i++){
+				aTr[i].cells[0].children[0].checked = true;
+			}
+		}else{
+			for(var i=0;i<aTr.length;i++){
+				aTr[i].cells[0].children[0].checked = false;
+			}
+		}
+		changeColor()
+	}
+	
+	//给排序按钮绑定时间函数
+	oSort.onclick = function(){
+		bubbleSort(form1.orderName.value,form1.orderBy.value)
+	}
+	//冒泡排序
+	function bubbleSort(orderName,orderBy){
+		var aTr = tab1.getElementsByTagName("tr");
+		for(var i=0;i<aTr.length;i++){
+			for(var j=0;j<aTr.length-i-1;j++){
+				//选id时，v1，v2取得是id里面的内容
+				if(orderName == 'id'){
+					var v1 = Number(aTr[j].cells[1].innerHTML)
+					var v2 = Number(aTr[j+1].cells[1].innerHTML)
+				}
+				//选年龄时，v1，v2取得是age里面的内容
+				if(orderName == 'age'){
+					var v1 = Number(aTr[j].cells[4].innerHTML)
+					var v2 = Number(aTr[j+1].cells[4].innerHTML)
+				}
+				//升序
+				if(orderBy == 'asc'){
+//					如果v1>v2,即把v2所指的tr插入到v1的前面
+					if(v1>v2){
+						tBody.insertBefore(aTr[j+1],aTr[j])
+					}
+				}
+				//降续
+				if(orderBy == 'desc'){
+//					如果v1<v2,即把v2所指的tr插入到v1的前面
+					if(v1<v2){
+						tBody.insertBefore(aTr[j+1],aTr[j])
+					}
+				}
+			}
+		}
+	}
+	
+	
+	//根据obj生成一行tr
+	function creatTr(obj){
+		var oTr = document.createElement("tr");
+		oTr.onmouseover = function(){
+			if(!oInp.checked){
+				//鼠标移入时改变颜色
+				this.className = 'hover';
+			}
+		}
+		oTr.onmouseout = function(){
+			if(!oInp.checked){
+				//鼠标移开时找回本色
+				this.className = this.oriColor;
+			}
+		}
+		
+		var oTd0 = document.createElement("td");
+		var oInp = document.createElement("input");
+		oInp.type = "checkbox";
+		
+		//点击多选框时做一些事情
+		oInp.onclick = function(){
+			var aTr = tBody.getElementsByTagName('tr');
+			//判断多选框的checked，如果开关为开，再遍历看每个多选框的开关
+			if(this.checked){
+				oTr.className = "sel";
+				//遍历所有的多选框时，看是否有开关为false，如果有，直接将checkall的开关关掉
+//				否则将checkall的开关打开
+				for(var i=0;i<aTr.length;i++){
+					if(aTr[i].cells[0].children[0].checked == false){
+						oCheckAll.checked = false;
+						return
+					}
+				}
+				oCheckAll.checked = true;
+			}else{
+				//如果开关为关，直接改变checkAll的checked为关
+				oCheckAll.checked = false;
+				oTr.className = "hover";
+			}
+		}
+		oTd0.appendChild(oInp);
+		oTr.appendChild(oTd0);
+		
+		var oTd1 = document.createElement("td");
+		oTd1.innerHTML = obj.id;
+		oTr.appendChild(oTd1);
+		
+		var oTd2 = document.createElement("td");
+		oTd2.innerHTML = obj.name;
+		oTr.appendChild(oTd2);
+		
+		var oTd3 = document.createElement("td");
+		oTd3.innerHTML = obj.sex;
+		oTr.appendChild(oTd3);
+		
+		var oTd4 = document.createElement("td");
+		oTd4.innerHTML = obj.age;
+		oTr.appendChild(oTd4);
+		
+		var oTd5 = document.createElement("td");
+		var oInp1 = document.createElement("input");
+		oInp1.type = "button";
+		oInp1.value = "上移";
+		oTd5.appendChild(oInp1);
+		//点击上移按钮，将这个tr移动到上一个tr的前面
+		oInp1.onclick = function(){
+			if(oTr.previousElementSibling){
+				tBody.insertBefore(oTr,oTr.previousElementSibling);
+			}
+			changeColor();
+		}
+		
+		var oInp2 = document.createElement("input");
+		oInp2.type = "button";
+		oInp2.value = "下移";
+		//点击下移按钮，将后一个tr移动到这个tr的前面
+		oInp2.onclick = function(){
+			if(oTr.nextElementSibling){
+				tBody.insertBefore(oTr.nextElementSibling,oTr);
+			}
+			changeColor();
+		}
+		oTd5.appendChild(oInp2);
+		
+		var oInp3 = document.createElement("input");
+		oInp3.type = "button";
+		oInp3.value = "删除";
+		oInp3.onclick = function(){
+			var aTr = tBody.getElementsByTagName('tr');
+			tBody.removeChild(oTr);
+			changeColor();
+			for(var i=0;i<aTr.length;i++){
+				if(aTr[i].cells[0].children[0].checked == false){
+					oCheckAll.checked = false;
+					return
+				}
+			}
+			oCheckAll.checked = true;
+		}
+		oTd5.appendChild(oInp3);
+		
+		
+		oTr.appendChild(oTd5);
+		
+		checkAll.checked = false;
+		tBody.appendChild(oTr)
+	}
+	
+	
+	//隔行变色
+	function changeColor(){
+		var aTr = tBody.getElementsByTagName('tr');
+		for(var i=0;i<aTr.length;i++){
+			//记录本来的颜色
+			if(i%2){
+				aTr[i].oriColor = "col1";
+			}else{
+				aTr[i].oriColor = "col2";
+			}
+			
+//			添加颜色，给多选框未被勾选的tr添加颜色
+			if(!aTr[i].cells[0].children[0].checked){
+				if(i%2){
+					aTr[i].className = 'col1';
+				}else{
+					aTr[i].className = 'col2';
+				}
+			}else{
+				aTr[i].className = 'sel';
+			}
+		}
+		
+	}
+</script>
+</body>
+</html>

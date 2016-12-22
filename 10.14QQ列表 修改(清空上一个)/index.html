@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li,
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+			}
+			.active{
+				background: pink;
+			}
+			.active1{
+				background: green;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="qq.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="list">
+				<h2><span></span>我的好友</h2>
+				<ul>
+					<li>小佳Love</li>
+					<li>从来就是这么正经</li>
+					<li>leo是个胖子</li>
+					<li>momo不是陌陌</li>
+				</ul>
+				<h2><span></span>企业好友</h2>
+				<ul>
+					<li>习近平</li>
+					<li>普京</li>
+					<li>奥巴马</li>
+				</ul>
+				<h2><span></span>黑名单</h2>
+				<ul>
+					<li>安倍</li>
+					<li>杜特尔特</li>
+				</ul>
+				
+				<script>
+					//获取元素
+					var oList = document.getElementsByClassName('list')[0];
+					var aH2 = oList.getElementsByTagName('h2');
+					var aUl = oList.getElementsByTagName('ul');
+					var aLi = oList.getElementsByTagName('li');
+					var last = 0;
+					var lastLi = 0;
+					var lastSelect = 0;
+					
+					//给每一个h2添加点击事件，做一些事情
+					for(var i=0;i<aH2.length;i++){
+						aH2[i].index = i;
+						aH2[i].off = true;
+						aH2[i].onclick = function(){
+							if(this.off){
+								aH2[last].className = '';
+								aUl[last].style.display = '';
+								aH2[last].off = true;
+								this.className = 'active';
+								this.off = false;
+								aUl[this.index].style.display = 'block';
+								last = this.index;
+							}else{
+								this.className='';
+								aUl[this.index].style.display = '';
+								this.off = true;
+							}
+						}
+					}
+					
+					for(var i=0;i<aLi.length;i++){
+						//给每个li添加鼠标移入时间
+						aLi[i].index = i;
+						aLi[i].flag = true;//true对应li未被点击
+						aLi[i].onmouseover = function(){
+							if(aLi[lastLi].flag){
+								aLi[lastLi].className = '';
+							}
+							if(this.flag){
+								this.className = 'active';
+							}
+							lastLi = this.index;
+						}
+					}
+					
+					for(var i=0;i<aLi.length;i++){
+						aLi[i].onclick = function(){
+							aLi[lastSelect].className = '';
+							aLi[lastSelect].flag = true;
+							this.className = 'selected';
+							this.flag = false;
+							lastSelect = this.index;
+						}
+					}
+					
+					for(var i=0;i<aLi.length;i++){
+						aLi[i].onmouseout = function(){
+							if(this.flag){
+								this.className = '';
+							}
+						}
+					}
+				</script>
+			</div>
+		</div>
+	</body>
+
+</html>

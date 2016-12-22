@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			函数：和数学中的函数没有关系
+			
+				更确切的说法应该叫做 方法 、命令
+				
+				作用：
+				
+					复用代码块
+					
+				函数的申明：
+					
+					匿名函数：（没有名字的函数）
+					注意：匿名函数直接申明会报错
+					function(){
+						函数体、函数内容
+					}
+					
+					有名函数：
+					function 函数名(){
+						
+					}
+					比如：
+					function fn(){
+						
+					}
+					
+				函数的调用
+				
+					匿名函数
+					
+						一般来说通过事件调用
+						比如
+							box.onclick = function(){}
+							
+					有名函数
+						
+						函数名()
+						比如
+						
+							fn()
+		-->
+		<input type="button" value="按钮" id="inp" />
+		<input type="button" value="按钮" id="inp2" />
+		<input type="button" value="按钮" id="inp3" />
+		<script>
+			function fn(){
+				alert(1);
+			    alert(2);
+			}
+//			document.getElementById("inp").onclick = fn();
+//			这样写是有问题的,fn()就会直接调用函数
+
+//			正确写法:
+			document.getElementById("inp").onclick = fn;
+			document.getElementById("inp2").onclick = fn;
+			document.getElementById("inp3").onclick = fn;
+		</script>
+	</body>
+</html>

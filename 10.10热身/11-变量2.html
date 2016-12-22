@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		    #box{
+		    	width:100px;
+		    	height:100px;
+		    	background-color:red;
+		    	transition: 1s;
+		    }
+		</style>
+	</head>
+	<body>
+		<!--
+			
+		-->
+		<input type="button" value="按钮" id="inp"/>
+		<div id="box"></div>
+		<script>
+			var box = document.getElementById("box");
+			var inp = document.getElementById("inp");
+			inp.onclick = function(){
+				box.style.background = "pink";
+				box.style.width = "300px";
+				box.style.height = "300px";
+			}
+		</script>
+	</body>
+</html>

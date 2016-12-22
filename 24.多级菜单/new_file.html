@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{list-style: none;}
+			#list ul{display: none;}
+		</style>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<h2>+第一级</h2>
+				<ul>
+					<li>
+						<h2>+第二级</h2>
+						<ul>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2>+第二级</h2>
+						<ul>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<h2>+第一级</h2>
+				<ul>
+					<li>
+						<h2>+第二级</h2>
+						<ul>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<h2>+第一级</h2>
+				<ul>
+					<li>
+						<h2>+第二级</h2>
+						<ul>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<h2>+第一级</h2>
+				<ul>
+					<li>
+						<h2>+第二级</h2>
+						<ul>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>+第三级</h2>
+								<ul>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+									<li>
+										<h2>第四级</h2>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<h2>第三级</h2>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+					<li>
+						<h2>第二级</h2>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		
+		<script>
+			var oList = document.getElementById('list');
+			var aH2 = document.getElementsByTagName('h2');
+			
+			for(var i=0;i<aH2.length;i++){
+				aH2[i].onoff = 'true';
+				if(aH2[i].nextElementSibling){
+					aH2[i].onclick = function(){
+						if(this.onoff){
+							close2(this);
+							this.innerHTML = "-"+this.innerHTML.slice(1);
+							this.nextElementSibling.style.display = 'block';
+							this.onoff = false;
+						}else{
+							close(this);
+						}
+					}
+				}
+				
+			}
+			
+			function close(obj){
+				var h2s = obj.parentNode.getElementsByTagName('h2');
+				for(var i=0;i<h2s.length;i++){
+					if(h2s[i].nextElementSibling && h2s[i].children){
+						h2s[i].innerHTML ="+"+h2s[i].innerHTML.slice(1);
+						h2s[i].nextElementSibling.style.display = 'none';
+						h2s[i].onoff = true;
+					}
+					
+				}
+			}
+			function close2(obj){
+				var h2ss = obj.parentNode.parentNode.getElementsByTagName('h2');
+				for(var i=0;i<h2ss.length;i++){
+					if(h2ss[i].nextElementSibling && h2ss[i].children){
+						h2ss[i].innerHTML ="+"+h2ss[i].innerHTML.slice(1);
+						h2ss[i].nextElementSibling.style.display = 'none';
+						h2ss[i].onoff = true;
+					}
+				}
+			}
+			
+			
+		</script>
+	</body>
+</html>

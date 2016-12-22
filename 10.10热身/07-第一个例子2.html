@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		    #box{
+		    	width:100px;
+		    	height:100px;
+		    	background-color:red;
+		    	transition: 1s;
+		    }
+		</style>
+	</head>
+	<body>
+		<!--
+			
+			需求：
+			
+				点击按钮的时候把div颜色变成粉色
+					改变div的宽度为300px
+					改变div的高度为300px
+				
+			思路（步骤）：
+			
+				1、找到这个按钮
+				2、当点击的时候做些什么事情
+				3、把div颜色变成粉色
+					改变div的宽度为300px
+					改变div的高度为300px
+			
+		-->
+		<input type="button" value="按钮" id="inp"/>
+		<div id="box"></div>
+		<script>
+//			1获取按钮   
+//			2添加点击事件(为点击事件绑定事件处理函数) onclick 当鼠标点击的时候
+//			alert( document.getElementById("in") )
+			document.getElementById("inp").onclick = function(){
+//				alert( document.getElementById("box") )
+				//3改变div的颜色
+				document.getElementById("box").style.background = "pink";
+				document.getElementById("box").style.width = "300px";
+				document.getElementById("box").style.height = "300px";
+			}
+		</script>
+	</body>
+</html>

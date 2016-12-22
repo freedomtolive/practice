@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+		<style>
+			body{
+				margin:0;
+			}
+			#box{
+				width: 400px;
+				height: 400px;
+				border:1px solid #000;
+				float:left;
+				margin-right:20px;
+			}
+			#box img{
+				width: 400px;
+				height: 400px;
+			}
+			#div1{
+				width: 200px;
+				height: 200px;
+				opacity: 0.6;
+				background:yellow;
+				position:absolute;
+				display:none;
+			}
+			#wrap{
+				width: 400px;
+				height: 400px;
+				border:1px solid #000;
+				float:left;
+				background: url(big.jpg) no-repeat 0 0;
+				background-size:800px 800px ;
+			}
+		</style>
+	<body>
+		<div id = "box" >
+			<div id ="div1" ></div>
+			<img src="small.jpg">
+		</div>
+		<div id = "wrap"></div>
+	</body>
+	
+	<script>
+		var oBox = document.getElementById('box');
+		var oDiv = document.getElementById('div1');
+		var oWrap = document.getElementById('wrap');
+		
+		oBox.onmousemove = function(ev){
+			var ev = ev || event;
+			oDiv.style.display = 'block';
+			
+			var x = ev.clientX - oBox.getBoundingClientRect().left - oDiv.offsetWidth/2;
+			var y = ev.clientY - oBox.getBoundingClientRect().top - oDiv.offsetHeight/2;
+			var maxL = box.clientWidth - oDiv.offsetWidth;
+			var maxT = box.clientHeight - oDiv.offsetHeight;
+			
+			if(x<0){
+				x = 0;
+			}
+			if(y<0){
+				y = 0;
+			}
+			if(x>maxL){
+				x = maxL;
+			}
+			if(y>maxT){
+				y = maxT
+			}
+			oDiv.style.left = x + 'px';
+			oDiv.style.top = y + 'px';
+			
+			oWrap.style.backgroundPosition =-400*x/maxL  + "px "+ -400*y/maxT +"px"
+		}
+		
+		oBox.onmouseout = function(){
+			oDiv.style.display = 'none';
+		}
+		
+		
+	</script>
+</html>

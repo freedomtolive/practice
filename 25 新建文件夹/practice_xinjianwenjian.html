@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			input{
+				padding:0;
+			}
+			.div1{
+				width:60px;
+				height: 80px;
+				float:left;
+				margin-right:10px;
+			}
+			.div1 img{
+				width: 60px;
+				height: 60px;
+			}
+			.div1 .name{
+				width: 60px;
+				height: 20px;
+				font:12px/20px "微软雅黑";
+				text-align: center;
+			}
+			.text1{
+				width: 60px;
+				height: 20px;
+				position:relative;
+				display: none;
+			}
+			.text{
+				width: 58px;
+				height: 18px;
+				font:12px/20px "微软雅黑";
+			}
+			.text1 .close{
+				position:absolute;
+				width: 14px;
+				height: 20px;
+				top:0;
+				right:0;
+				text-align:center;
+			}
+			#box{
+				width: 1000px;
+				height: 800px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="新建文件夹" id="btn1" />
+		<input type="button" value="删除文件夹" id="btn2" />
+		<div id="box"></div>
+	</body>
+	
+	<script>
+		var oBox = document.getElementById('box');
+		var oBtn0 = document.getElementById('btn1');
+		var oBtn1 = document.getElementById('btn2');
+		var aImg = oBox.getElementsByTagName('img');
+		var aSpan = oBox.getElementsByClassName('name');
+		var aClose = oBox.getElementsByClassName('close');
+		var aDiv = oBox.getElementsByClassName('div1')
+		var num = 0;
+		var arr1 = [];
+
+		oBtn0.onclick = function(){
+			if(arr1.length == 0){
+				num++
+				var oDiv = document.createElement('div');
+				oDiv.innerHTML = '<img src="img.png" /><span class="name">新建文件夹<span>'+num+'</span></span><div class="text1"><input type="text" class="text" /><span class="close">X</span></div>';
+				oDiv.className = 'div1';
+				oBox.appendChild(oDiv);
+					for(var i=0;i<aImg.length;i++){
+						aImg[i].parentNode.onoff = true;
+						aImg[i].onclick = function(ev){
+							var ev = ev||event;
+							ev.cancelBubble = true;
+							this.parentNode.style.backgroundColor = 'rgba(0,0,255,.6)'
+							this.parentNode.onoff = false;
+						}
+						aSpan[i].onclick = function(ev){
+							var ev = ev||event;
+							ev.cancelBubble = true;
+							this.style.display = 'none';
+							this.nextElementSibling.style.display = 'block';
+							this.nextElementSibling.children[0].focus();
+						}
+						aClose[i].onclick = function(ev){
+							var ev = event;
+							ev.cancelBubble = true;
+							this.parentNode.style.display = 'none';
+							this.parentNode.previousElementSibling.innerHTML = this.previousElementSibling.value;
+							this.parentNode.previousElementSibling.style.display = 'block';
+						}
+					}
+			}else{
+				var oDiv = document.createElement('div');
+				oDiv.innerHTML = '<img src="img.png" /><span class="name">新建文件夹<span>'+arr1[0]+'</span></span><div class="text1"><input type="text" class="text" /><span class="close">X</span></div>';
+				oDiv.className = 'div1';
+				arr1.shift();
+				oBox.appendChild(oDiv);
+				
+				for(var i=0;i<aImg.length;i++){
+					aImg[i].parentNode.onoff = true;
+					aImg[i].onclick = function(ev){
+						var ev = ev||event;
+						ev.cancelBubble = true;
+						this.parentNode.style.backgroundColor = 'rgba(0,0,255,.6)'
+						this.parentNode.onoff = false;
+					}
+					aSpan[i].onclick = function(ev){
+						var ev = ev||event;
+						ev.cancelBubble = true;
+						this.style.display = 'none';
+						this.nextElementSibling.style.display = 'block';
+					}
+					aClose[i].onclick = function(ev){
+						var ev = event;
+						ev.cancelBubble = true;
+						this.parentNode.style.display = 'none';
+						this.parentNode.previousElementSibling.innerHTML = this.previousElementSibling.value;
+						this.parentNode.previousElementSibling.style.display = 'block';
+					}
+				}
+			}
+			
+		}
+		
+		oBtn1.onclick = function(){
+			for(var i=0;i<aImg.length;i++){
+				if(aImg[i].parentNode.onoff == false){
+					arr1.push(aDiv[i].children[1].children[0].innerHTML)
+					arr1.sort(function(a,b){
+						return a-b
+					})
+					console.log(arr1)
+					oBox.removeChild(aImg[i].parentNode);
+					i--;
+				}
+			}
+		}
+		
+	
+		oBox.onclick = function(){
+			for(var i=0;i<aImg.length;i++){
+				aImg[i].parentNode.style.backgroundColor = '';
+			}
+		}
+	</script>
+</html>

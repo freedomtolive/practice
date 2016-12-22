@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			img{
+				width: 400px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/0.jpg" id="img1"/>
+		<input type="button" value="下一张" id="btn" />
+		<script>
+		    var img1 = document.getElementById("img1");
+		    var btn = document.getElementById("btn");
+		    var num = 0;
+		    btn.onclick = function(){
+		    	num += 1;//num增加
+		    	
+				if(num > 4){//判断num是否超出
+					num = 4;
+//					alert( "已经到最后一张了！" );
+				}
+				
+				//通过num处理图片的src
+		    	img1.src = "img/"+num+".jpg";
+		    }
+		</script>
+	</body>
+</html>

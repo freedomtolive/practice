@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				margin:0;
+				padding:0;
+				list-style: none;
+			}
+			#list{
+				width: 400px;
+				height: 70px;
+				margin:0 auto;
+				overflow: hidden;
+			}
+			#list li{
+				position:relative;
+				float:left;
+				width: 50px;
+				height: 140px;
+				top:0;
+			}
+			img{
+				width: 50px;
+				height: 70px;
+				border:none;
+				vertical-align: top;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="list">
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/c.jpg" alt="" />
+				<img src="img1/c.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/c.jpg" alt="" />
+				<img src="img1/c.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+			<li>
+				<img src="img1/0.jpg" alt="" />
+				<img src="img1/0.jpg" alt="" />
+			</li>
+		</ul>
+		
+		<script>
+			var oList = document.getElementById('list');
+			var aLi = oList.getElementsByTagName('li');
+			var aImg = document.getElementsByTagName('img');
+			var now = new Date();
+			
+			var now = new Date();
+			var h = now.getHours();
+			var m = now.getMinutes();
+			var s = now.getSeconds();
+			var str = toTwo(h)+":"+toTwo(m)+":"+toTwo(s);
+			
+			for(var i=0;i<aLi.length;i++){
+				if(i==2 || i==5){
+					aLi[i].getElementsByTagName('img')[0].src = "img1/c.jpg"
+				}else{
+					aLi[i].getElementsByTagName('img')[0].src = "img1/"+str.charAt(i)+".jpg"
+				}
+				
+			}
+			
+			setInterval(function(){
+				tab();
+			},1000)
+			
+			function tab(){
+				var now2 = new Date();
+				var h2 = now2.getHours();
+				var m2 = now2.getMinutes();
+				var s2 = now2.getSeconds();
+				str2 = toTwo(h2)+":"+toTwo(m2)+":"+toTwo(s2);
+				
+				var m=checkDiffer(str,str2);
+				for(var i=0;i<m.length;i++){
+					go(m[i][0],m[i][1])
+				}
+				str = str2;
+			}
+			
+			function go(index,srcNum){
+				aLi[index].getElementsByTagName('img')[1].src = "img1/"+srcNum+".jpg";
+				doMove(aLi[index],{"top":-70},600,function(){
+					aLi[index].style.top = 0;
+					aLi[index].getElementsByTagName('img')[0].src = "img1/"+srcNum+".jpg";
+				})
+			}
+			
+			//找出不一样的位数，并添加到一个数组中
+			function checkDiffer(a,b){
+				var arr = [];
+				for(var i=0;i<b.length;i++){
+					if(a.charAt(i) != b.charAt(i)){
+						arr.push([i,b.charAt(i)])
+					}
+				}
+				return arr;
+			}
+			
+			//补0
+			function toTwo(n){
+				return n<10? "0"+n:""+n;
+			}
+			
+			function doMove(obj,object1,duration,endFn){
+					var startTime = new Date();
+					var d = duration;
+					var j ={};
+					
+					for(var a in object1){
+						j[a] = {};
+						j[a].b = parseFloat(getComputedStyle(obj)[a]);
+						j[a].c = object1[a] - j[a].b;
+					}
+					
+					obj.timer = setInterval(function(){
+						var t = new Date() - startTime;
+						
+						if(t>=d){
+							t = d;
+						}
+						for(var a in j){
+							var b = j[a].b;
+							var c = j[a].c;
+							
+							var v = c/d*t+b;
+							obj.style[a] = v + 'px';
+						}
+						if(t==d){
+							clearInterval(obj.timer)
+							endFn && endFn();
+						}
+					},16)
+				}
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box div{
+				margin-bottom:10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div>
+				<span>111111</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+			<div>
+				<span>222222</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+			<div>
+				<span>333333</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+			<div>
+				<span>444444</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+			<div>
+				<span>555555</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+			<div>
+				<span>666666</span>
+				<input type="button" class="btn1" value="上移"/>
+				<input type="button" class="btn2" value="下移"/>
+			</div>
+		</div>
+		<script>
+			var oBox = document.getElementById('box');
+			var aDiv = oBox.getElementsByTagName('div');
+			var aBtn1 = oBox.getElementsByClassName('btn1');
+			var aBtn2 = oBox.getElementsByClassName('btn2');
+			
+			for(var i=0;i<aBtn1.length;i++){
+				aBtn1[i].onclick = function(){
+					if(this.parentNode.previousElementSibling){
+						oBox.insertBefore(this.parentNode,this.parentNode.previousElementSibling);
+					}
+				}
+				aBtn2[i].onclick = function(){
+					if(this.parentNode.nextElementSibling){
+						oBox.insertBefore(this.parentNode.nextElementSibling,this.parentNode)
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

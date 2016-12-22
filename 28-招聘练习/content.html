@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>招贤纳士-详细页面</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script src="js/data.js"></script>
+
+</head>
+
+<body>
+	<div id="wrap">
+		<div class="left">
+			<h2>招贤纳士</h2>
+			<ul>
+				<!--<li class="focus"><a href="javascript:;">社会招聘</a></li>
+		<li><a href="javascript:;">校园招聘</a></li>-->
+			</ul>
+		</div>
+		<div class="right">
+		<div class="title">
+			<img src="img/shzp.gif" />
+		</div>
+		<div class="info content" id="content">
+			<!-- <h2>测试工程师【社会招聘】</h2>
+			<div>
+			  <span class="l">招聘公司：北京智信创通信息技术有限公司查看公司地理位置>></span>
+			  <span>公司性质：股份制公司</span>
+			  <span class="l">职位性质：全职</span>
+			  <span>工作地点：上海</span>
+			  <span class="l">工作经验：3年以上</span>
+			  <span>学历要求：本科及以上</span>
+			  <span class="l">招聘人数：2人</span>
+			  <span>薪资待遇：面议</span>
+			  <span class="l">发布日期：2013-7-30</span>
+			  <span>招聘类型：社会招聘</span>
+			</div>
+		<div class="clear"></div>
+	
+		<dl>
+		  <dt>工作职责：</dt>
+		  <dd>从事计算机软件的测试工作。</dd>
+		</dl>
+	
+		<dl>
+		  <dt>岗位要求：</dt>
+		  <dd>1.计算机或相关专业本科以上学历；</dd>
+		  <dd>2.从事软件测试工作3年及以上；</dd>
+		  <dd>3.具备良好的沟通能力和快速学习能力；</dd>
+		  <dd>4.精通测试策略和方法、测试用例设计；</dd>
+		  <dd>5.熟悉DB2、AIX等平台的基本操作；</dd>
+		  <dd>6.具备2年以上金融IT行业经验，特别是有金融行业相关业务的测试或者开发工作经验者优先。</dd>
+		</dl>
+		<p>有意者请投递简历至 liuyajuan@fulan.com.cn</p> -->
+		</div>
+	</div>
+	<div class="clear"></div>
+	
+	<script src="js/data.js"></script>
+	<script>
+		var oWrap = document.getElementById('oWrap');
+		var oLift = document.getElementsByClassName('left')[0];
+		var oUl = oLift.getElementsByTagName('ul')[0];
+		var aLi = oUl.getElementsByTagName('li');
+		var aA = oUl.getElementsByTagName('a');
+		var oContent = document.getElementById('content');
+		var sea = window.location.search.substr(1);
+		var hash = window.location.hash.substr(1);
+		
+		if(sea == ''){
+			sea = "sh";
+		}
+		if(hash == ''){
+			hash = 0;
+		}
+		
+		
+		for(var i=0;i< aData.list.length;i++){
+			 createLi(i);
+		}
+		aA[0].href = 'list.html?sh#'+0;
+		aA[1].href = 'list.html?xy#'+0;
+		
+		for(var i=0;i<aA.length;i++){
+			aA[i].index = i;
+			if(sea == 'sh'){
+				aA[0].parentNode.className = 'focus'
+			}else{
+				aA[1].parentNode.className = 'focus'
+			}
+			aA[i].onclick = function(){
+				window.location.search = aData.list[this.index].lx ;
+			}
+		}
+		
+		
+		//创建一个li
+		function createLi(n){
+			var oLi = document.createElement('li');
+			var oA = document.createElement('a');
+			oA.href = 'javascript:;';
+			oA.innerHTML = aData.list[n].text;
+			oLi.appendChild(oA);
+			oUl.appendChild(oLi);
+		}
+		
+		//创建一个内容
+		createContent(sea,hash);
+		function createContent(attr,n){
+			var oH2 = document.createElement('h2');
+			oH2.innerHTML = aData[attr].text[n].zw;
+			oContent.appendChild(oH2);
+			
+			var oDiv = document.createElement('div');
+			oContent.appendChild(oDiv);
+			
+			var oDiv1 = document.createElement('div');
+			oDiv1.className = "clear";
+			oContent.appendChild(oDiv1);
+			
+			var oSpan = document.createElement('span');
+			oSpan.className = 'l';
+			oDiv.appendChild(oSpan).innerHTML = '招聘公司：'+aData[attr].text[n].gs;
+			
+			var oSpan1 = document.createElement('span');
+			oDiv.appendChild(oSpan1).innerHTML = '公司性质：'+aData[attr].text[n].xz
+			
+			var oSpan2 = document.createElement('span');
+			oSpan2.className = 'l';
+			oDiv.appendChild(oSpan2).innerHTML = '职位性质：'+aData[attr].text[n].gz;
+			
+			var oSpan3 = document.createElement('span');
+			oDiv.appendChild(oSpan3).innerHTML = '工作地点：'+aData[attr].text[n].dd
+			
+			var oSpan4 = document.createElement('span');
+			oSpan4.className = 'l';
+			oDiv.appendChild(oSpan4).innerHTML = '工作经验：'+aData[attr].text[n].jy;
+			
+			var oSpan5 = document.createElement('span');
+			oDiv.appendChild(oSpan5).innerHTML = '学历要求：'+aData[attr].text[n].xl
+		
+			var oSpan6 = document.createElement('span');
+			oSpan6.className = 'l';
+			oDiv.appendChild(oSpan6).innerHTML = '招聘人数：'+aData[attr].text[n].rs;
+			
+			var oSpan7 = document.createElement('span');
+			oDiv.appendChild(oSpan7).innerHTML = '薪资待遇：'+aData[attr].text[n].dy
+			
+			var oSpan8 = document.createElement('span');
+			oSpan8.className = 'l';
+			oDiv.appendChild(oSpan8).innerHTML = '发布日期：'+aData.date(aData[attr].text[n].sj,0);
+			
+			var oSpan9 = document.createElement('span');
+			oDiv.appendChild(oSpan9).innerHTML = '招聘类型：'+aData[attr].text[n].lx
+			
+			for(var i=aData[attr].text[n].info.length-1;i>=0;i--){
+				var oDl = document.createElement('dl');
+				oContent.appendChild(oDl)
+				var oDt = document.createElement('dt');
+				oDt.innerHTML = aData[attr].text[n].info[i].t;
+				oDl.appendChild(oDt)
+				
+				for(var j=0;j<aData[attr].text[n].info[i].l.length;j++){
+					var oDd = document.createElement('dd');
+					oDd.innerHTML = aData[attr].text[n].info[i].l[j];
+					oDl.appendChild(oDd)
+				}
+			}
+			
+			var oP = document.createElement('p')
+			oP.innerHTML = '有意者请投递简历至'+aData.email;
+			oContent.appendChild(oP);
+		}
+		
+	</script>
+</div>
+</body>
+
+</html>

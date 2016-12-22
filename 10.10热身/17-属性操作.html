@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box" class="div1"></div>
+		<input type="button" value="按钮" id="btn" />
+		<!--
+			
+			元素属性
+				
+				比如元素的id，元素的class，type，value
+				
+			属性操作：
+			
+				读：获取
+				
+				写：修改
+				
+			属性操作的方法：
+			
+				. "点" 相当于的
+				
+				[ ] "中括号" 
+				
+					注意：当使用[]进行属性操作的时候为 属性名字加上引号
+					
+					比如：alert( document.getElementById("box")["id"] );
+						alert( document.getElementById("box")[id] );（X）
+			
+		-->
+		<script>
+//			属性的读操作
+//			alert( document.getElementById("box").id );//box
+			
+//			alert( document.getElementById("box").className );//div1
+
+//			alert( document.getElementById("btn").type )//button
+
+//			alert( document.getElementById("btn").value )//button
+
+//			var a = document.getElementById("box").id;
+//			alert( a );//box
+			
+//			属性的写操作
+//			document.getElementById("btn").value = "button";
+
+			alert( document.getElementById("box")["id"] );//box
+		</script>
+	</body>
+</html>

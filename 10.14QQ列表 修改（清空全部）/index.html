@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li,
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+			}
+			.active{
+				background: pink;
+			}
+			.active1{
+				background: green;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="qq.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="list">
+				<h2><span></span>我的好友</h2>
+				<ul>
+					<li>小佳Love</li>
+					<li>从来就是这么正经</li>
+					<li>leo是个胖子</li>
+					<li>momo不是陌陌</li>
+				</ul>
+				<h2><span></span>企业好友</h2>
+				<ul>
+					<li>习近平</li>
+					<li>普京</li>
+					<li>奥巴马</li>
+				</ul>
+				<h2><span></span>黑名单</h2>
+				<ul>
+					<li>安倍</li>
+					<li>杜特尔特</li>
+				</ul>
+				
+				<script>
+					//获取元素
+					var oList = document.getElementsByClassName('list')[0];
+					var aH2 = oList.getElementsByTagName('h2');
+					var aUl = oList.getElementsByTagName('ul');
+					var aLi = oList.getElementsByTagName('li');
+					
+					//给每一个h2添加点击事件，做一些事情
+					for(var i=0;i<aH2.length;i++){
+						aH2[i].index = i;
+						aH2[i].onOff = true;//true对应h2未被点击
+						aH2[i].onclick = function(){
+							for(var i=0;i<aH2.length;i++){
+								if(i != this.index){
+									aH2[i].className = '';
+									aUl[i].style.display = 'none';
+									aH2[i].onOff = true;
+								}
+							}
+							if(this.onOff){
+								this.className = 'active';
+								aUl[this.index].style.display = 'block';
+							}else{
+								this.className = '';
+								aUl[this.index].style.display = 'none';
+							}
+							this.onOff = !this.onOff
+							console.log(aH2[0].onOff,aH2[1].onOff,aH2[2].onOff)
+						}
+					}
+					
+					for(var i=0;i<aLi.length;i++){
+						aLi[i].off = true;//true对应li未被点击
+						aLi[i].onmouseover = function(){
+//							for(var i=0;i<aLi.length;i++){
+//								if(aLi[i].off){
+//									aLi[i].className = '';	
+//								}
+//							}
+							if(this.off == true){
+								this.className = 'active';
+							}
+							console.log(aLi[0].off,aLi[1].off,aLi[2].off,aLi[3].off)
+						}
+						aLi[i].onclick = function(){
+							for(var i=0;i<aLi.length;i++){
+								aLi[i].className = '';
+								aLi[i].off = true;
+							}
+							this.className = 'selected';
+							this.off = false;
+						}
+						aLi[i].onmouseout = function(){
+							if(this.off == true){
+								this.className = '';
+							}
+						}
+					}
+				
+				</script>
+			</div>
+		</div>
+	</body>
+
+</html>

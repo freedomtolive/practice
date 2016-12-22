@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>招贤纳士-社会招聘</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<!--<base target="_blank" />-->
+		<script src="js/data.js"></script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="left">
+				<h2>招贤纳士</h2>
+				<ul>
+					<!--<li class="focus"><a href="javascript:;">社会招聘</a></li>
+      				<li><a href="javascript:;">校园招聘</a></li> -->
+				</ul>
+			</div>
+			<div class="right">
+				<div class="title">
+					<img src="img/shzp.gif" />
+				</div>
+				<div class="info" id="info1">
+
+					<!-- <p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+				            <span>需求人数：2名</span>
+				         	<span class="date">2013年7月30日</span>
+				        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p>
+		
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			            <span>需求人数：12名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p>
+			
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			            <span>需求人数：21名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p> -->
+
+				</div>
+				<div class="pages">
+					<span class="prev" id="prev1">
+          <a href="javascript:;">
+            <img src="img/pre.gif">
+          </a>
+        </span>
+					<span class="next" id="next1">
+          <a href="javascript:;">
+            <img src="img/next.gif">
+          </a>
+        </span>
+					<p id="page1">
+						<!--<span class="focus">
+            <a href="javascript:;">1</a>
+          </span>
+          <span>
+            <a href="javascript:;">2</a>
+          </span>
+          <span>
+            <a href="javascript:;">3</a>
+          </span> -->
+					</p>
+
+				</div>
+
+			</div>
+			<div class="clear"></div>
+		</div>
+	</body>
+
+	<script>
+		var oWrap = document.getElementById('oWrap');
+		var oLift = document.getElementsByClassName('left')[0];
+		var oUl = oLift.getElementsByTagName('ul')[0];
+		var aLi = oUl.getElementsByTagName('li');
+		var aA = oUl.getElementsByTagName('a');
+		var oInfo = document.getElementById('info1');
+		var oPage = document.getElementById('page1');
+		var aSpan = oPage.getElementsByTagName('span');
+		var sea = window.location.search.substr(1);
+		var oImg1 = document.querySelector('.title img')
+		var aA2 = oInfo.getElementsByTagName('a');
+		var oPrev = document.getElementById('prev1');
+		var oNext = document.getElementById('next1');
+		var aPage = oPage.getElementsByTagName('a');
+		var hash = window.location.hash.substr(1);
+		var numm = 2;//一页生成几个
+		
+		
+//		window.location.hash = 0;
+		if(sea == ''){
+			sea = 'sh';
+		}
+		if(hash == ''){
+			hash = 0;
+		}
+		
+		for(var i=0;i< aData.list.length;i++){
+			 createLi(i);
+		}
+		aA[0].href = 'list.html?sh#'+0;
+		aA[1].href = 'list.html?xy#'+0;
+		
+		
+		for(var i=hash*numm;i<hash*numm+numm;i++){
+			createP(sea,i)
+		}
+		
+		if(sea == 'sh'){
+			aA[0].parentNode.className = "focus";
+		}else{
+			aA[1].parentNode.className = "focus"
+		}
+		
+		for(var i=0;i<aA.length;i++){
+			aA[i].index = i;
+			aA[i].onclick = function(){
+				window.location.search = aData.list[this.index].lx ;
+			}
+		}
+		
+		//创建一个li
+		function createLi(n){
+			var oLi = document.createElement('li');
+			var oA = document.createElement('a');
+			oA.href = 'javascript:;';
+			oA.innerHTML = aData.list[n].text;
+			oLi.appendChild(oA);
+			oUl.appendChild(oLi);
+		}
+		
+		
+		//新建一个p
+		function createP(attr,n){
+			oImg1.src = aData[attr].img
+			var oP0 = document.createElement('p') 
+			oP0.className = 'zp';
+			oInfo.appendChild(oP0);
+			
+			var oSpan0 = document.createElement('span');
+			oP0.appendChild(oSpan0);
+			
+			var oA = document.createElement('a');
+			oA.innerHTML = "★职位需求:"+ aData[attr].text[n].zw;
+			oA.href = 'content.html?'+sea+'#'+n;
+			oSpan0.appendChild(oA);
+//			<span>需求人数：2名</span>
+			var oSpan0 = document.createElement('span');
+			oSpan0.innerHTML = "需求人数："+aData[attr].text[n].rs+"名";
+			oP0.appendChild(oSpan0);
+//			<span class="date">2013年7月30日</span>
+			var oSpan1 = document.createElement('span');
+			oSpan1.className = "data";
+			oSpan1.innerHTML = aData.date(aData[attr].text[n].sj,0)
+			oP0.appendChild(oSpan1);
+			var oP1 = document.createElement('p');
+			oP1.className = 'yq';
+			oP1.innerHTML = aData[attr].text[n].info[0].l.join('').substr(0,100)+'...';
+			oInfo.appendChild(oP1);
+//			<a href="">查看详情</a>
+			var oA2 = document.createElement('a');
+			oA2.href = 'content.html?'+sea+'#'+n;
+			oA2.innerHTML = "查看详情";
+			oP1.appendChild(oA2)
+		}
+		
+		page();
+		aSpan[hash].className = 'focus';
+		
+//		for(var i=0;i<aSpan.length;i++){
+//			aSpan[i].index = i;
+//			aSpan[i].onclick = function(){
+//				for(var i=0;i<aSpan.length;i++){
+//					window.location.hash = this.index;
+//				}
+//			}
+//		}
+		
+		//点击prev按钮时做一些事情
+		oPrev.onclick = function(){
+			var num = Number(window.location.hash.substr(1));
+			num--;
+			oInfo.innerHTML = '';
+			if(num < 0){
+				num = 0;
+			}
+			window.location.hash = num;
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].className = '';
+			}
+			aSpan[num].className = 'focus'
+			var num1 = num*numm
+			var num2 = num*numm+numm
+			for(var i=num1;i<num2 ;i++){
+				if(aData[sea].text[i])
+				 createP(sea,i)
+			}
+		}
+		
+		//点击next按钮时做一些事情
+		oNext.onclick = function(){
+			var num = Number(window.location.hash.substr(1));
+			num++;
+			
+			if(num > aPage.length-1){
+				num = aPage.length-1;
+			}
+			window.location.hash = num;
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].className = '';
+			}
+			aSpan[num].className = 'focus'
+			oInfo.innerHTML = '';
+			var num1 = num*numm
+			var num2 = num*numm+numm
+			
+			for(var i=num1;i<num2 ;i++){
+				if(aData[sea].text[i])
+				 createP(sea,i)
+			}
+		}
+		
+		//生成翻页
+		function page(){
+			var num = Math.ceil(aData[sea].text.length/numm)
+			for(var i=0;i<num;i++){
+				var oSpan = document.createElement('span');
+				oPage.appendChild(oSpan);
+				var oA = document.createElement('a');
+				oA.href = 'list.html#'+i;
+				oA.innerHTML = (i+1);
+				oSpan.appendChild(oA)
+			}
+		}
+		
+		for(var i=0;i<aA.length;i++){
+			window.onhashchange = function(){
+				var num = Number(window.location.hash.substr(1));
+				for(var i=0;i<aSpan.length;i++){
+					aSpan[i].className = '';
+				}
+				aSpan[num].className = 'focus';
+				
+				oInfo.innerHTML = '';
+				var num1 = window.location.hash.substr(1)*numm
+				var num2 = window.location.hash.substr(1)*numm+numm
+				
+				for(var i=num1;i<num2 ;i++){
+					if(aData[sea].text[i])
+					 createP(sea,i)
+				}
+			}
+		}
+		
+		
+		
+	</script>
+</html>

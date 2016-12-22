@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<input type="text" id="text1" />
+	<input type="button" value="发送" id="btn" />
+	<ul id="list"></ul>
+	<script>
+	
+		//添加需求：
+		
+//			点击一下发送之后,清空输入框中的内容
+
+		var text1 = document.getElementById("text1");
+		var btn = document.getElementById("btn");
+		var list = document.getElementById("list");
+		btn.onclick = function(){
+//			text1.value = "";//如果在此处清空输入框的值，会导致下面获取到的是一个空字符串
+			var str = text1.value;
+//			list.innerHTML = "<li>"+str+"</li>" + list.innerHTML; //新输入的内容在上面
+			text1.value = "";
+
+//			str = "";//使用这句话不能达到清空输入框的内容的目的
+			
+			list.innerHTML += '<li>'+str+'</li>';//和下面的写法作用一致
+//			list.innerHTML = list.innerHTML + '<li>'+str+'</li>';
+		}
+	</script>
+</body>
+</html>

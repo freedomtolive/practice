@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<!--
+		
+		需求：
+			点击按钮获取输入框的内容添加到UL里
+
+		思路：
+			1获取元素
+			2按钮点击的时候发生事情
+			3获取输入框的内容
+			4添加一个li到ul中（li的内容和输入框内容一样）
+			
+		
+	-->
+	<input type="text" id="text1" />
+	<input type="button" value="发送" id="btn" />
+	<ul id="list"></ul>
+	<script>
+//		1获取元素
+		var text1 = document.getElementById("text1");
+		var btn = document.getElementById("btn");
+		var list = document.getElementById("list");
+		btn.onclick = function(){//2按钮点击的时候发生事情
+//			3获取输入框的内容
+			var str = text1.value;//js获取到的都是字符串形式的值
+//			alert( str );
+			list.innerHTML = "<li>"+str+"</li>" + list.innerHTML;//"<li>"+"1"+"</li>" 
+		}
+	</script>
+</body>
+</html>

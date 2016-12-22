@@ -1,0 +1,214 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+	
+	a{
+		text-decoration: none;
+		color:white;
+		width: 70px;
+		display: block;
+		text-align: center;
+	}
+	
+	#nav{
+		width: 100%;
+		position: relative;
+		margin: 0;
+		padding: 0;
+		height: 70px;
+	}
+	#nav>li{
+		border-right: 1px solid #ccc;
+		background-color: black;
+		float: left;
+		line-height: 30px;
+		height: 30px;
+		list-style: none;
+	}
+	#nav>li.active,#nav>li>a.active{
+		background-color: red;
+		border-right-color:red;
+	}
+	#nav div{
+		position: absolute;
+		top:50px;
+		left: 0px;
+		width: 850px;
+		background-color: red;
+		text-align: center;
+		color:white;
+		display: none;
+	}
+	#nav div a{
+		float: left;
+		width: 80px;
+		padding: 0 10px 0;
+		line-height: 40px;
+	}
+	#nav div a:hover{
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	#nav .active div{
+		display: block;
+	}
+	#banner{
+		display: block;
+		width: 850px;
+	}
+</style>
+</head>
+
+<body>
+	<ul id="nav">
+		<li class="active">
+			<a href="javascript:;">首页</a>
+			
+		</li>
+		<li>
+			<a href="javascript:;">服饰</a>
+			<div>
+				<a href="javascript:;">流行</a>
+				<a href="javascript:;">秀场</a>
+				<a href="javascript:;">搭配</a>
+				<a href="javascript:;">街拍</a>
+				<a href="javascript:;">配饰</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">美容</a>
+			<div>
+				<a href="javascript:;">新品试用</a>
+				<a href="javascript:;">美丽奇迹</a>
+				<a href="javascript:;">美肌榜样</a>
+				<a href="javascript:;">护肤</a>
+				<a href="javascript:;">彩妆</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">偶像</a>
+			<div>
+				<a href="javascript:;">做范儿</a>
+				<a href="javascript:;">最佳穿衣</a>
+				<a href="javascript:;">红毯礼服</a>
+				<a href="javascript:;">日妆造型</a>
+				<a href="javascript:;">星妆时刻</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">乐活</a>
+			<div>
+				<a href="javascript:;">视线</a>
+				<a href="javascript:;">玩乐时光</a>
+				<a href="javascript:;">旅行</a>
+				<a href="javascript:;">吃痴哲学</a>
+				<a href="javascript:;">潮流眼</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">男士</a>
+			
+		</li>
+		<li>
+			<a href="javascript:;">健康</a>
+			
+		</li>
+		<li>
+			<a href="javascript:;">视觉</a>
+			<div>
+				<a href="javascript:;">有图有真</a>
+				<a href="javascript:;">吐槽</a>
+				<a href="javascript:;">惊艳</a>
+				<a href="javascript:;">图片站</a>
+				<a href="javascript:;">然并卵</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">活动</a>
+			<div>
+				<a href="javascript:;">视线</a>
+				<a href="javascript:;">玩乐时光</a>
+				<a href="javascript:;">旅行</a>
+				<a href="javascript:;">吃痴哲学</a>
+				<a href="javascript:;">潮流眼</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">专题</a>
+			<div>
+				<a href="javascript:;">视线</a>
+				<a href="javascript:;">玩乐时光</a>
+				<a href="javascript:;">旅行</a>
+				<a href="javascript:;">吃痴哲学</a>
+				<a href="javascript:;">潮流眼</a>
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">分享</a>
+			<div>
+				<a href="javascript:;">新浪微博</a>
+				<a href="javascript:;">微信</a>
+				
+			</div>
+		</li>
+		<li>
+			<a href="javascript:;">流行</a>
+			<div>
+				<a href="javascript:;">视线</a>
+				<a href="javascript:;">玩乐时光</a>
+				<a href="javascript:;">旅行</a>
+				<a href="javascript:;">吃痴哲学</a>
+				<a href="javascript:;">潮流眼</a>
+			</div>
+		</li>
+	</ul>
+	
+	<script>
+		var aLi = document.getElementsByTagName('li');
+		var timer = null;	
+		var num = 0;
+		
+		for(var i=0;i<aLi.length;i++){
+			//为所有的li添加鼠标移入时间绑定函数，做一些事情
+			aLi[i].onmouseover =function (){
+				console.log("2");
+				//清楚所有li的class，避免li的class消失慢（鼠标移开后500msdiv才会消失）而出现多个class出现的情况
+				for(var i=0;i<aLi.length;i++){
+				//为li添加自定义属性，因为后面定时器中的this指向document，因此需要自定义属性对应所移开的li
+					aLi[i].index = i;
+					aLi[i].className = '';
+				}
+				//为第一个li添加class，使第一个li始终处于红色背景下
+				aLi[0].className = 'active';
+				//为移入的li添加class
+				this.className = 'active';
+				//在鼠标移入的时候，清除定时器，避免多个定时器同时工作
+				clearTimeout(timer);
+			}
+			
+			aLi[i].onmouseout = function(){
+				console.log("1");
+				//因为下面不能使用this，因此在这里要获取所移除的li是第几个，用自定义属性获取
+				num = this.index;
+				//在鼠标移开的时候开启定时器，做一些事情
+				timer = setTimeout(function(){
+				//因为函数内又包含了函数，因此此时的this所指的不是li，而是window，
+				//因此在给下面所移开的li去样式时，此处不能使用this
+				//使li的class在500ms后清除
+					aLi[num].className = '';
+				},300) 
+			}
+			
+			//子集移入会触发父级的移出事件，
+			//子集移入会触发父级的移入事件（冒泡事件），
+			//所以再写代码的过程中要判断上述两件事发生的先后顺序。
+			
+		}
+		
+		
+	</script>
+</body>
+</html>

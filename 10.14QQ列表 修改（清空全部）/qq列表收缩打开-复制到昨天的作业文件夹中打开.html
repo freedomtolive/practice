@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li,
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			
+			li {
+				list-style: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="qq.css" />
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="list">
+				<h2 class="header"><span></span>我的好友</h2>
+				<ul>
+					<li>小佳Love</li>
+					<li>从来就是这么正经</li>
+					<li>leo是个胖子</li>
+					<li>momo不是陌陌</li>
+				</ul>
+				<h2><span></span>企业好友</h2>
+				<ul>
+					<li>习近平</li>
+					<li>普京</li>
+					<li>奥巴马</li>
+				</ul>
+				<h2><span></span>黑名单</h2>
+				<ul>
+					<li>安倍</li>
+					<li>杜特尔特</li>
+				</ul>
+			</div>
+		</div>
+		<!--
+			清除所有的：
+				点击h2的时候，把除了 点击以外的h2 全部清除class
+					如果点击的h2有class(开关为true),那么就把class去掉
+					如果点击的h2没有class(开关为false),就添上class
+				
+				移入li的时候
+					如果移入的li（this）身上的开关为false（未被选中）加“active”
+				
+				点击li的时候
+					把所有的li开关变成false，把class去掉
+					为点击的li加上class，开关变成true
+					
+				移出li的时候
+					如果这个li的开关为false，把class去掉
+		-->
+		<script>
+			var h2s = document.getElementsByTagName("h2");
+			var uls = document.getElementsByTagName("ul");
+			var lis = document.getElementsByTagName("li");
+			for (var i = 0; i < h2s.length; i++) {
+				h2s[i].index = i;
+				h2s[i].onoff = false;
+				h2s[i].onclick = function(){
+					//把除了 点击以外的h2 全部清除class
+					for(var i = 0;i<h2s.length;i++){
+						if(i != this.index){
+							h2s[i].className = "";
+							uls[i].style.display = "none";
+							h2s[i].onoff = false;
+						}
+					}
+//					给点击的h2的状态取反
+					if(this.onoff){
+//						那么就把class去掉
+						this.className = "";
+						uls[this.index].style.display = "none";
+					}else{
+//						加上class
+						this.className = "active";
+						uls[this.index].style.display = "block";
+					}
+					this.onoff = !this.onoff;
+				}
+			}
+			for(var i = 0;i<lis.length;i++){
+				lis[i].onoff = false;//false对应没有class(selected)
+				lis[i].onmouseover = function(){
+					for(var i=0;i<lis.length;i++){
+						if(lis[i].onoff == false){
+							lis[i].className = '';	
+						}
+					}
+					if(!this.onoff){
+						this.className = "active";
+					}
+					console.log(!lis[0].onoff,!lis[1].onoff,!lis[2].onoff,!lis[3].onoff)
+				}
+				lis[i].onclick = function(){
+					for (var i = 0; i < lis.length; i++) {
+						lis[i].className = "";
+						lis[i].onoff = false;
+					}
+					this.className = "selected";
+					this.onoff = true;
+				}
+//				lis[i].onmouseout = function(){
+//					if(!this.onoff){
+//						this.className = "";
+//					}
+//				}
+			}
+		</script>
+	</body>
+</html>

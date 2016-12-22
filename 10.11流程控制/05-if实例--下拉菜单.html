@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#list{
+				background-color: pink;
+				width: 100px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+			需求
+				1、点击按钮，当下拉菜单隐藏的时候显示
+				2、点击按钮，当下拉菜单显示的时候隐藏
+				
+			思路：
+			
+				1、获取按钮
+				2、点击按钮的时候发生一些事情
+				3、如果下拉菜单是隐藏的话，让它显示出来；
+					如果下拉菜单是显示的话，让它隐藏起来；
+		-->
+		<input type="button" value="显示/隐藏" id="btn" />
+		<ul id="list">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+		<!--
+			
+			js操作的都是元素的行间样式
+			
+			解决方案：
+			
+				使用变量 来对应元素的样式（list的display）
+		-->
+		<script>
+		
+		
+//			1获取元素
+			var btn = document.getElementById("btn");
+			var list = document.getElementById("list");
+//			申明变量对应元素的显示隐藏
+
+//			自己定的规矩:
+//			变量为true对应 元素 none（隐藏）
+//			变量为false对应 元素 block（显示）
+
+//			当元素的显示或者隐藏切换了,那么开关也要切换
+
+			var onoff = true;
+			//2点击按钮的时候发生一些事情
+			btn.onclick = function(){
+//				alert( list.style.display );
+//				3、如果下拉菜单是隐藏的话，让它显示出来；
+//					否则，让它隐藏起来；
+//				if(如果下拉菜单是隐藏的话){
+//				if( list.style.display == "none" ){
+				if( onoff ){
+//					让它显示出来；
+					list.style.display = "block";
+					//当元素显示的时候，我们的变量（开关）需要对应发生改变
+					onoff = false;
+				}else{
+//					让它隐藏起来；
+					list.style.display = "none";
+					onoff = true;
+				}
+			}
+		</script>
+	</body>
+</html>

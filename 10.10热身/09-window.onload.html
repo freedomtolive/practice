@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:100px;
+				height:100px;
+				background-color:red;
+			}
+		</style>
+		<!--
+			
+			当script标签写在body的内元素之前，由于js是从上往下一行一行执行的，所以当执行到获取元素的时候，页面中还没有元素，所以获取到的是空的，为了解决这个问题，我们使用window.onload
+			
+			window.onload = function(){
+				当页面全部加载完成之后执行（会等待图片文件，加载完成）
+			}
+			
+			会等待所有文件全部加载完，当页面中有比较大的图片时，会导致要等待图片加载完成才会执行js代码
+			
+			建议少使用window.onload
+			
+			把script标签写在body内部的最下面
+		-->
+		<script>
+			
+			window.onload = function(){
+				alert( document.getElementById("inp") );
+			    document.getElementById("inp").onclick = function(){
+			    	alert(1)
+					document.getElementById("box").style.background = "pink";
+					document.getElementById("box").style.width = "300px";
+					document.getElementById("box").style.height = "300px";
+			    }
+			}
+			
+		</script>
+	</head>
+	<body>
+		<input type="button" value="按钮" id="inp" />
+		<div id="box"></div>
+		<img src=""/>
+		
+		<script>
+		    //一般js建议放在这里
+		</script>
+	</body>
+</html>

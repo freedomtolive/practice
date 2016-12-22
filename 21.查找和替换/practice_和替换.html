@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css"  />
+	</head>
+	<body>
+		<div id="box">
+			<div class="top">
+				<div class="top_left">妙味课堂是北京妙味趣学信息技术有限公司旗下的IT培训品牌。创办多年来我们一直恪守住IT培训的原则与底限，扎扎实实研发课程、不断提升服务质量，
+在公司需求和学员进度中巧妙把握平衡，帮助学员打下坚实技术基础，不断向各大IT公司输送优秀开发人才！2007年12月07日 - “妙味课堂” 品牌名称和网站域名 “www.miaov.com” 诞生；2008年05月14日 - 研发完成 “XHTML+CSS2精品课程”，第二年后，妙味第一版网站上线；
+2010年09月06日 - 研发完成 “JavaScript实战课程”，并配合2010年新官网上线，同时对外发布；2011年至2013年，妙味课堂精准研发出领先行业的 “HTML5&CSS3课程”，并配合2013年最新官网同时对外发布;2014年至今，妙味课堂重磅推出超值的“VIP会员”收费服务，并配合优良的IT培训资源、成熟的远程课堂方案，
+彻底打通线上线下环节，为广大学习爱好者提供了一个更加便捷、有效、实用的IT学习方案！</div>
+				<div class="top_right">
+					<a href="script:;">展开</a>
+					<ul class="list">
+						<li>查找</li>
+						<li>替换</li>
+					</ul>
+				</div>
+			</div>
+			<div class="bottom disappear">
+				<div class="content">
+					<div class="content_head">
+						<div>查找</div>
+						<div>替换</div>
+					</div>
+					<div class="content_bottom">
+						<div class="find">
+							<input type="text" class="text1" />
+							<input type="button" value="查找" class="button1"  />
+						</div>
+						<div class="change">
+							<input type="text" class="text1" />
+							<input type="text" class="text1" />
+							<input type="button" value="替换" class="button1"  />
+						</div>
+					</div>
+					<a href="script:;" id="dis">X</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			//获取元素
+			var oTop_right = document.getElementsByClassName('top_right')[0];
+			var oTop_left = document.getElementsByClassName('top_left')[0];
+			var oA = oTop_right.getElementsByTagName('a')[0];
+			var oList = oTop_right.getElementsByClassName('list')[0];
+			var aLi = oTop_right.getElementsByTagName('li');
+			var oBottom = document.getElementsByClassName('bottom')[0];
+			var oContent_head = document.getElementsByClassName('content_head')[0];
+			var aDiv = oContent_head.getElementsByTagName('div');
+			var oChange = document.getElementsByClassName('change')[0];
+			var oFind = document.getElementsByClassName('find')[0];
+			var oText1 = oFind.getElementsByClassName('text1')[0];
+			var oBtn1 = oFind.getElementsByClassName('button1')[0];
+			var oChange = document.getElementsByClassName('change')[0];
+			var oText2 = oChange.getElementsByClassName('text1')[0];
+			var oText3 = oChange.getElementsByClassName('text1')[1];
+			var oBtn2 = oChange.getElementsByClassName('button1')[0];
+			var str1 = ''; 
+			var oDis = document.getElementById('dis');
+			var onOff = true	//true对应展开未被点击
+			var str = oTop_left.innerHTML;
+			//给展开添加点击事件绑定函数
+			oA.onclick = function(){
+				if(onOff){
+					oList.style.display  = 'block';
+				}else{
+					oList.style.display  = 'none';
+				}
+				onOff = !onOff;
+			}
+			//给查找添加时间绑定函数
+			aDiv[0].onclick=aLi[0].onclick = function(){
+				oBottom.style.display = 'block';
+				oChange.style.display = 'none';
+				oFind.style.display = 'block';
+				aDiv[0].className = 'bg';
+				aDiv[1].className = '';
+			}
+			aDiv[1].onclick=aLi[1].onclick = function(){
+				oBottom.style.display = 'block';
+				oFind.style.display = 'none';
+				oChange.style.display = 'block';
+				aDiv[0].className = '';
+				aDiv[1].className = 'bg';
+			}
+			
+			oBtn1.onclick = function(){
+				if(oText1.value == ""){
+					alert("请输入查找的内容~~~")
+					return;
+				}
+				if(str.indexOf(oText1.value)==-1){
+					alert("查找不到所要查找的值~~~")
+				}else{
+					oTop_left.innerHTML = str.split(oText1.value).join("<span>"+oText1.value+"</span>")
+					oText1.value = '';
+				}
+			}
+			
+			oBtn2.onclick = function(){
+				if(oText2.value == ''){
+					alert("请输入所要修改的值~~~")
+				}else if(str.indexOf(oText2.value) == -1){
+					alert('查找不到所要修改的值~~~')
+				}else{
+					oTop_left.innerHTML = str.split(oText2.value).join("<span>"+oText3.value+"</span>")
+					str = str.split(oText2.value).join( oText3.value );
+					oText2.value = '';
+					oText3.value = '';
+				}
+			}
+			
+			oDis.onclick = function(){
+				oBottom.style.display = 'none';
+			}
+			
+		</script>
+	</body>
+</html>

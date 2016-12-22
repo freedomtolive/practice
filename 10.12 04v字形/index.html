@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				margin: 0;
+				width: 1000px;
+				height: 800px;
+				margin: 0 auto;
+				background: url(bg.png) no-repeat center center;
+			}
+			
+			.wrap {
+				width: 290px;
+				height: 490px;
+				background: url(bg1.png) no-repeat center center;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin: -245px 0 0 -145px;
+				position: absolute;
+				box-shadow: 0 0 8px rgba(0,0,0,.3);
+				border-radius: 5px;
+			}
+			
+			.box {
+				width: 252px;
+				height: 252px;
+				position: absolute;
+				top: 70px;
+				left: 50%;
+				margin-left: -126px;
+			}
+			
+			.btn {
+				width: 114px;
+				height: 36px;
+				border: 1px solid #68bcfa;
+				border-radius: 3px;
+				position: absolute;
+				bottom: 30px;
+				left: 50%;
+				margin-left: -57px;
+				text-align: center;
+				font: 16px/36px arial;
+				color: #68bcfa;
+				cursor: pointer;
+			}
+			.btn:hover {
+				background: #68bcfa;
+				color: #fff;
+			}
+			
+			.box div {
+				width: 50px;
+				height: 50px;
+				background: #fff;
+				text-align: center;
+				line-height: 50px;
+				font-size: 20px;
+				color: #68bcfa;
+				border-radius: 2px;
+				position: absolute;
+				opacity: 0;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+
+	<body onselectstart="return false;">
+		<div class="wrap">
+			<div class="box" id="box">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+			</div>
+			<div class="btn">生成</div>
+		</div>
+		<script>
+		//获取元素
+		var oWrap = document.getElementsByClassName('wrap')[0];
+		var oBox = document.getElementsByClassName('box')[0];
+		var aDiv = oBox.getElementsByTagName('div');
+		var oBtn = document.getElementsByClassName('btn')[0];
+		var num = 0;
+		
+		
+		//上下左右时实现的程序
+		function fnUp(){
+			for(var i=0;i<aDiv.length;i++){
+				if(i<3){
+					aDiv[i].style ='opacity:1; left:'+(i*50)+'px; top:'+(i*50)+'px'
+				}else{
+					aDiv[i].style ='opacity:1; left:'+(i*50)+'px; top:'+(200-i*50)+'px'
+				}
+			}
+			aDiv[(aDiv.length-1)/2].style.borderRadius = "0";
+		}
+		function fnRight(){
+			for(var i=0;i<aDiv.length;i++){
+				if(i<3){
+					aDiv[i].style ='opacity:1; top:'+(i*50)+'px; right:'+(i*50)+'px'
+				}else{
+					aDiv[i].style ='opacity:1; top:'+(i*50)+'px; right:'+(200-i*50)+'px'
+				}
+			}
+			aDiv[(aDiv.length-1)/2].style.borderRadius = "0";
+		}
+		function fnDown(){
+			for(var i=0;i<aDiv.length;i++){
+				if(i<3){
+					aDiv[i].style ='opacity:1; left:'+(200-i*50)+'px; bottom:'+(i*50)+'px'
+				}else{
+					aDiv[i].style ='opacity:1; left:'+(200-i*50)+'px; bottom:'+(200-i*50)+'px'
+				}
+			}
+			aDiv[(aDiv.length-1)/2].style.borderRadius = "0";
+		}
+		function fnLeft(){
+			for(var i=0;i<aDiv.length;i++){
+				if(i<3){
+					aDiv[i].style ='opacity:1; top:'+(200-i*50)+'px; left:'+(i*50)+'px'
+				}else{
+					aDiv[i].style ='opacity:1; top:'+(200-i*50)+'px; left:'+(200-i*50)+'px'
+				}
+			}
+			aDiv[(aDiv.length-1)/2].style.borderRadius = "0";
+		}	
+		oBtn.onclick = function(){
+			if(num == 0){
+				fnUp();
+			}else if(num == 1){
+				fnRight();
+			}else if(num == 2){
+				fnDown();
+			}else if(num == 3){
+				fnLeft();
+			}
+			num ++;
+			num %= 4
+			oBtn.innerHTML = "变换";
+		}
+		</script>
+	</body>
+
+</html>

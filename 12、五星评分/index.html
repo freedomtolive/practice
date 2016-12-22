@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>百度评分</title>
+		<style>
+			body,h1 {
+				margin: 0;
+				padding: 0;
+				-webkit-font-smoothing: antialiased;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="pingfen.css"/>
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<div class="caption">
+					<h1></h1>
+					<span>总体评价</span>
+				</div>
+				<div class="context">
+					<div class="starts">
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+						<span>☆</span>
+					</div>
+					<div class="info"></div>
+				</div>
+				<div class="tips">
+					小提示：点击星星就能打分
+				</div>
+			</div>
+		</div>
+		<script>
+			var aSpan = document.querySelectorAll(".starts span");
+			var oInfo =	document.querySelectorAll(".info")[0];
+			var num = -1;
+			var arr = ['极差','一般','不错','推荐','力荐'];
+			//封装函数
+			
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].index = i;
+				aSpan[i].onmouseover = function(){
+					tab(this.index);
+				}
+				aSpan[i].onmouseout = function(){
+					tab(num)
+				}
+				aSpan[i].onclick = function(){
+					num = this.index
+				}
+			}
+			
+			function tab(n){
+				for(var i=0;i<aSpan.length;i++){
+					if(i<=n){
+						aSpan[i].innerHTML = "★";
+						aSpan[i].style.color = n<2? "gray" : "red";
+					}else{
+						aSpan[i].innerHTML = "☆";
+						aSpan[i].style.color = "grey";
+					}
+					if(n == -1){
+						oInfo.style.display = 'none';
+					}else{
+						oInfo.style.display = 'block';
+						oInfo.innerHTML = arr[0];
+					}
+				}
+			}
+			
+		</script>
+	</body>
+</html>

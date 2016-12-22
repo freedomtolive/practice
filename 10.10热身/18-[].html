@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:100px;
+				height:100px;
+				background-color:red;
+			};
+		</style>
+	</head>
+	<body>
+		<div id="box" class="div1">div</div>
+		<!--
+			
+			当操作属性的时候属性名不符合变量命名规范的时候只能使用[]
+			
+			如果非要使用点的话，需要改变成驼峰式命名法
+			
+				background-color 需要变成 backgroundColor
+				
+			!!注意:
+				当需要改变的属性值是一个变量的时候只能使用[],方括号中间如果是变量的话，不需要加引号
+			
+			
+		-->
+		<script>
+			var box = document.getElementById("box");
+//			box.style.background-color = "pink";//操作属性的时候属性名不符合变量命名规范
+//			box.style.font-size = "20px";//操作属性的时候属性名不符合变量命名规范
+//			box.style.padding-top = "20px";//操作属性的时候属性名不符合变量命名规范
+
+//			box.style["background-color"] = "pink";
+//			box.style["font-size"] = "50px";
+//			box.style["padding-top"] = "100px";
+
+			
+//			box.style.backgroundColor = "pink";
+//			box.style.fontSize = "50px";
+//			box.style.paddingTop = "100px";
+
+
+//当需要改变的属性值是一个变量的时候只能使用[],方括号中间如果是变量的话，不需要加引号
+			var a = "width";
+			
+//			box.style.width = "200px";
+
+//			box.style.a = "200px";（X）
+//			box.style["a"] = "200px";（X）
+			box.style[a] = "200px";//(√)
+
+			
+		</script>
+	</body>
+</html>

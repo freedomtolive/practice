@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			
+			需求：
+			
+				点击按钮的时候把按钮颜色变成粉色
+				
+			思路（步骤）：
+			
+				1、找到这个按钮
+				2、当点击的时候做些什么事情
+				3、把按钮颜色变成粉色
+			
+			通过id的方式获取元素？
+			
+				document.getElementById("id名")
+				get Element By Id
+				获取 元素       通过 id
+				
+				注意
+					1、getElementById前面只能是document
+				
+					2、括号中的id名字必须用成对的英文半角状态下的双引号或者单引号引起来（""  ''）
+					
+					document.getElementById("id名')（X）
+					
+					
+			为元素添加事件
+				
+				获取到的元素.on事件名称
+				
+				比如
+					document.onclick
+					
+			.的作用相当于“的”
+		-->
+		<input type="button" value="按钮" id="inp"/>
+		<script>
+			//获取元素
+//		    document.getElementById("inp");
+		    //alert( document.getElementById("inp") );//[object HTMLInputElement]
+		    
+		    
+		    document.getElementById("inp").onclick = function(){
+		    	//要做的事情写在这里
+//		    	alert( 3 )
+
+//				把inp的颜色变成粉色
+//				style="background:pink"使用js添加上这段样式
+				
+				document.getElementById("inp").style.background = "pink";
+//				inp元素 的 样式 的 背景 变成 粉色 
+		    };
+//			为元素添加事件的方式
+//			元素.onclick
+		</script>
+	</body>
+</html>

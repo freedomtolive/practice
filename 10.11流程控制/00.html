@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:100px;
+				height:100px;
+				background-color:red;
+			}
+		</style>
+	</head>
+	<body>
+		属性：<input type="text" id="text1" />
+		值：<input type="text" id="text2" />
+		<input type="button" value="click" id="btn" />
+		<div id="box">div</div>
+		<!--
+			需求：
+				点击按钮获取输入框中属性名称和属性值，对div设置 
+			
+			思路：
+				1获取按钮
+				2点击按钮的时候做些事情
+				3获取输入框中的属性名和属性值
+				4通过属性名和属性值 改变div的样式
+				
+		-->
+		<script>
+		    //1获取元素
+		   	var btn = document.getElementById("btn");
+		    var text1 = document.getElementById("text1");
+		    var text2 = document.getElementById("text2");
+		    var box = document.getElementById("box");
+		    
+//		    var attr = text1.value;//获取text1的value
+//		    
+////		    alert(attr)
+//		    
+//		    var value = text2.value;//获取text2的value
+		    //2点击按钮的时候做些事情
+		    btn.onclick = function(){
+		    	
+		    	//3获取输入框中的属性名和属性值(value)
+		    	
+			    var attr = text1.value;//获取text1的value
+			    var value = text2.value;//获取text2的value
+//		    	alert( value )
+				//4通过属性名和属性值 改变div的样式
+				box.style[attr] = value;
+//				也可以写成这种形式
+//				box.style[text1.value] = text2.value;
+				
+		    }
+		    
+		</script>
+	</body>
+</html>
