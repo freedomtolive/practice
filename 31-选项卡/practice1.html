@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				display: none;
+				font-size:50px;
+				line-height: 100px;
+				text-align: center;
+			}
+			.active{
+				background: pink;
+			}
+			.show{
+				display: block;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<input type="button" value="按钮" class="active" />
+		<input type="button" value="按钮" />
+		<input type="button" value="按钮" />
+		<div class="show">1</div>
+		<div>2</div>
+		<div>3</div>
+		
+		<script>
+			//获取元素
+			var aInp = document.getElementsByTagName('input');
+			var aDiv = document.getElementsByTagName('div');
+			
+			//为所有的input添加点击事件
+			for(var i=0;i<aInp.length;i++){
+				aInp[i].index = i;
+				aInp[i].onclick = function(){
+					//把所有的input的class都去掉
+					for(var i=0;i<aInp.length;i++){
+						aInp[i].className = "";
+					}
+					//给点中的input添加class
+					this.className = "active";
+					//把所有的div的class取消掉
+					for(var i=0;i<aDiv.length;i++){
+						aDiv[i].className = '';
+					}
+					aDiv[this.index].className = 'show';
+				}
+			}
+		</script>
+	</body>
+</html>

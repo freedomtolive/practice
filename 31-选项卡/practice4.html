@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background-color:red;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮0" />
+		<input type="button" value="按钮1" />
+		<input type="button" value="按钮2" />
+		<div>div0</div>
+		<div>div1</div>
+		<div>div2</div>
+		
+		<script>
+			var aDiv = document.getElementsByTagName('div');
+			var aInp = document.getElementsByTagName('input');
+			var arr = [];
+			var last = 0;
+			for(var i=0;i<aDiv.length;i++){
+				arr.push(aDiv[i]);
+				aInp[i].index = i;
+			}
+			
+			for(var i=0;i<aDiv.length;i++){
+				aInp[i].onclick = function(){
+					arr[last].style.display = "none";
+					arr[this.index].style.display = "block";
+					last = this.index
+				}
+			}
+		</script>
+	</body>
+</html>
