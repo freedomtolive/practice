@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position:absolute;
+				top:0;
+				left:0;
+			}
+			#div2{
+				width: 100px;
+				height: 100px;
+				background: yellow;
+				position:absolute;
+				top:0;
+				left:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>
+		
+		<script>
+		//构造函数
+			function Drag(id){		//父类
+				this.div = document.getElementById(id);
+				this.disX = null;
+				this.disY = null;
+				this.init();
+			}
+			
+			Drag.prototype = {
+				//因为重新为原型的对象赋值，所以需要手动将constructor重新指向构造函数
+				constructor:Drag,
+				//初始化
+				init(){
+					var This = this;
+					console.log(this.div)
+					//为鼠标按下绑定函数
+					this.div.onmousedown = function(ev){
+						var ev = ev || event;
+						This.fnDown(ev,this);
+					};
+				},
+				//鼠标按下时做得事情，存值
+				fnDown(ev,obj){
+					console.log(1)
+					var This = this;
+					this.disX = ev.clientX - obj.offsetLeft;
+					this.disY = ev.clientY - obj.offsetTop;
+					//为鼠标移动绑定函数
+					document.onmousemove = function(ev){
+						var ev = ev || event;
+						This.fnMove(ev);
+					};
+					//为鼠标抬起绑定函数
+					document.onmouseup = this.fnUp;
+				},
+				//鼠标移动时做得事情
+				fnMove(ev){
+					console.log(2)
+					this.div.style.left = ev.clientX - this.disX + 'px';
+					this.div.style.top = ev.clientY - this.disY + 'px';
+				},
+				fnUp(){
+					console.log(this)
+					this.onmousemove = this.onmouseup = null;
+				}
+			}
+			
+			var div1 = new Drag('div1');
+			
+			function Childs(id){		//子类
+				//用call函数调用的方式为子类的构造函数绑定属性
+				Drag.call(this,id)
+			}
+			//用封装好的函数为子类的构造函数添加方法
+			extent(Childs,Drag)
+			//因为添加方法时改变了原型的对象，因此需要手动的将constructor重新指向childs这个构造函数上
+			Childs.prototype.contructor = Childs;
+			//子类为限制范围的拖拽，需求改变了，因此需要重新复制fnMove这个函数
+			Childs.prototype.fnMove = function(ev){
+				var L = ev.clientX - this.disX;
+				var T = ev.clientY - this.disY;
+				if(L<0){
+					L = 0;
+				}else if(L>document.documentElement.clientWidth - this.div.offsetWidth){
+					L = document.documentElement.clientWidth - this.div.offsetWidth
+				}
+				if(T<0){
+					T = 0;
+				}else if(T>document.documentElement.clientHeight - this.div.offsetHeight){
+					T = document.documentElement.clientHeight - this.div.offsetHeight
+				}
+				this.div.style.left = L + 'px';
+				this.div.style.top = T + 'px';
+			}
+			var div2 = new Childs('div2');
+			
+			//将绑在obj2的原型上的属性和方法全部都给到obj1的方法
+			function extent(fn1,fn2){
+				for(var attr in fn2.prototype){
+					fn1.prototype[attr] = fn2.prototype[attr]
+				}
+			}
+			
+		</script>
+	</body>
+</html>
