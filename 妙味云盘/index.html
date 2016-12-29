@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="src2/index.css" />
+	</head>
+	<body>
+		<div id="wrap">
+			<header class="head">
+				<div class="head_left">
+					<img src="img/title.png" />
+					<h3 class="title">妙味云盘</h3>
+				</div>
+				<!--<div id="create_great" class="create_succeed">
+					<div class="succeed_tubiao"></div>
+					<span>新建文件成功</span>
+				</div>-->
+				<div id="create_great" class="create_fail">
+					<div></div>
+					<span>新建文件失败</span>
+				</div>
+				<!--<div id="create_great" class="slow">
+					<div class="slow_tubiao"></div>
+					<span>连接服务器超时，请稍后再试</span>
+				</div>-->
+				<!--<div class="succeed">
+					<div class="succeed_tubiao"></div>
+					<span>删除文件成功</span>
+				</div>
+				<div class="choice">
+					<div class="choice_tubiao"></div>
+					<span>请选择文件</span>
+				</div>-->
+				<div class="head_right">
+					<div class="head_img">
+						<span></span>
+					</div>
+					<div class="head_jiantou">
+					</div>
+					<div class="line"></div>
+					<div class="head_shezhi"></div>
+				</div>
+			</header>
+			<div id="tools">
+				<div class="toos_left">
+					<div class="download">
+						<i></i>
+						<span>下载</span>
+					</div>
+					<div class="download">
+						<i></i>
+						<span>分享</span>
+					</div>
+					<div class="download" id="move">
+						<i></i>
+						<span>移动到</span>
+					</div>
+					<div class="download" id="replaceName">
+						<i></i>
+						<span>重命名</span>
+					</div>
+					<div class="download" id="delet">
+						<i></i>
+						<span>删除</span>
+					</div>
+					<div class="download" id="new_folder">
+						<i></i>
+						<span>新建文件夹</span>
+					</div>
+					<div class="download">
+						<i></i>
+					</div>
+				</div>
+				<div class="tools_right">
+					<div class="zhanshi">
+						<span></span>
+					</div>
+					<div class="zhanshi no">
+						<span class="zhanshi_img1"></span>
+						<span class="zhanshi_jiantou1"></span>
+						<div class="zhanshi_tan dis_n">
+							<div class="shezhi_wrap"></div>
+							<div class="zhanshi_time">
+								<span></span>按时间排序
+							</div>
+							<div  class="zhanshi_word">
+								<span></span>按字母排序
+							</div>
+							<div class="zhanshi_smallImg">
+								<span></span>显示缩略图
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="content">
+				<div class="content_left">
+					<!--<ul id="list">
+						<li  class="open">
+							<h3 class="h3_1">
+								<span class="jiantou"></span>
+								<span class="wenjian"></span>
+								微云
+							</h3>
+							<ul>
+								<li class="open">
+									<h3 class="h3_2">
+										<span class="jiantou"></span>
+										<span class="wenjian"></span>
+										JS课程
+									</h3>
+									<ul>
+										<li class="open">
+											<h3 class="h3_3">
+												<span class="jiantou"></span>
+												<span class="wenjian"></span>
+												123
+											</h3>
+										</li>
+										<li class="close">
+											<h3 class="h3_3">
+												<span class="jiantou"></span>
+												<span class="wenjian"></span>
+												333
+											</h3>
+										</li>
+										<li>
+											<h3 class="h3_3">
+												<span class="jiantou"></span>
+												<span class="wenjian"></span>
+												CSS课程
+											</h3>
+											<ul>
+												<li class="close">
+													<h3 class="h3_4">
+													<span class="wenjian"></span>
+														css课程
+													</h3>
+													<ul></ul>
+												</li>
+												<li class="close">
+													<h3 class="h3_4">
+														<span class="jiantou"></span>
+														<span class="wenjian"></span>
+														123
+													</h3>
+													<ul></ul>
+												</li>
+											</ul>
+											<ul>	
+												<li class="open">
+													<h3 class="h3_3">
+														<span class="jiantou"></span>
+														<span class="wenjian"></span>
+														JS基础课程
+													</h3>
+													<ul>
+														<li class="close">
+															<h3 class="h3_4">
+																<span class="jiantou"></span>
+																<span class="wenjian"></span>
+																111
+															</h3>
+															<ul></ul>
+														</li>
+														<li class="close">
+															<h3 class="h3_4">
+																<span class="jiantou"></span>
+																<span class="wenjian"></span>
+																222
+															</h3>
+															<ul></ul>
+														</li>
+													</ul>
+												</li>
+												
+											</ul>
+										</li>
+										
+									</ul>
+								</li>
+							</ul>
+						</li>
+						
+					</ul>-->
+					
+				</div>
+				<div class="content_right">
+					<header id="content_head">
+						<div class="head_check" id="checkAll"></div>
+						<div id="content_head_center">
+							<div class="content_title">微云</div>
+							<!--<div class="bigger"></div>
+							<div class="content_title">JS课程</div>
+							<div class="bigger"></div>
+							<div class="content_title">CSS课程</div>-->
+						</div>
+					</header>
+					<div id="content_box">
+						<div class="content1">
+							<!--<div class="content_div">
+								<div class="div1"></div>
+								<strong class="div1_font">JS基础课程</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>
+							<div class="content_div">
+								<div class="div1"></div>
+								<strong class="div1_font">CSS课程</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>
+							<div class="content_div">
+								<div class="div1"></div>
+								<strong class="div1_font">CSS3课程</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>
+							<div class="content_div">
+								<div class="div2"></div>
+								<strong class="div1_font">未标题-2</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>
+							<div class="content_div">
+								<div class="txt"></div>
+								<strong class="div1_font">要回复的帖子</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>
+							<div class="content_div">
+								<div class="zip"></div>
+								<strong class="div1_font">8-12</strong>
+								<div class="gou"></div>
+								<input type="text" class="text" />
+							</div>-->
+						</div>
+						<div class="content2 dis_n">
+							<ul id="small_list">
+								<!--<li>
+									<div class="li_left">
+										<div class="head_check"></div>
+										<span class="pos_img"></span>
+										<div class="small_font dis_n">JS基础课程</div>
+										<input type="text" class="text2" />
+									</div>
+									<div class="li_center">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+									<time>2016-08-22 16:08</time>
+								</li>
+								<li>
+									<div class="li_left">
+										<div class="head_check"></div>
+										<span class="pos_img"></span>
+										<div class="small_font">JS基础课程</div>
+									</div>
+									<div class="li_center">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+									<time>2016-08-22 16:08</time>
+								</li>-->
+							</ul>
+						</div>
+						<div id="delet_now" class="dis_n">
+							<div class="delet_now_left"></div>
+							<div class="delet_now_right">正在删除 <span id="delet_num">0/15</span></div>
+						</div>
+						<div id="content_warp" class="dis_n">
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<!--<div id="wrap_1" class="dis_n">
+			<div id="delet_wenjian">
+				<div class="delet_content">
+					<div class="delet_img"></div>
+					<div class="delet_font">
+						<div>确定要删除这个文件夹吗？</div>
+						<div>已删除的文件夹可以在回收站找到？</div>
+					</div>
+				</div>
+				<footer class="delet_foot">
+					<div>确定</div>
+					<div>取消</div>
+				</footer>
+			</div>
+		</div>-->
+		<!--<div id="wrap_1" class="wrap_1 dis_n">
+			<div id="pos_choice">
+				<h3 class="pos_choice_title">选择储存位置</h3>
+				
+				<div id="pos_content" >
+					<!--<div id="pos_list">
+						<h3 class="zong_pos h3_1">
+							<span class="pos_img"></span>
+							<span class="pos_font">JS基础课程</span>
+						</h3>
+					</div>
+					<div id="pos_choice_content" >-->
+						<!--<ul>
+							<li class="open">
+								<h3 class="h3_2">
+									<span class="jiantou"></span>
+									<span class="wenjian"></span>
+									<span class="font">JS基础课程</span>
+								</h3>
+								<ul>
+									<li class="close">
+										<h3 class="h3_3">
+											<span class="jiantou"></span>
+											<span class="wenjian"></span>
+											333
+										</h3>
+									</li>
+								</ul>
+							</li>
+						</ul>-->
+					<!--</div>-->
+				</div>
+				<div class="cue">不可以移动到当前元素的下面</div>
+				<footer class="pos_choice_foot">
+					<div>确定</div>
+					<div>取消</div>
+				</footer>
+				<div class="cha">×</div>
+			</div>
+		</div>-->
+		<script src = "src2/drag.js"></script>
+		<script src="src2/dialog.js"></script>
+		<script src = "js/data.js"></script>
+		<script src="js/tools.js"></script>
+		<script src="js/weiyunHTML.js"></script>
+		<script src = "js/weiyun.js"></script>
+	</body>
+</html>
