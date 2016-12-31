@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width,user-scalable=no'>
+		<!--user-scalable 是否允许用户缩放 (yes||no) IOS10下无效 --> 
+		<!--width 可视区的宽度 (number||device-width)-->
+		<title></title>
+		<script>
+			var html = document.documentElement;
+			//计算根节点的字体大小
+			html.style.fontSize = html.clientWidth / 15 + 'px';
+			
+			//阻止pc和浏览器默认行为。
+			document.addEventListener('touchstart',function(ev){
+				ev.preventDefault();
+			});
+			/*
+			解决：
+			阻止pc端事件的优点：
+				1.IOS10下设置meta禁止用户缩放是不可行的。（使用阻止pc事件就可以在IOS10下禁止用户缩放）
+				
+				2.解决IOS10下溢出隐藏的问题。
+				
+				3.禁止系统默认的滚动条、阻止橡皮筋效果
+				
+				4.禁止长按选中文字、选中图片、系统默认菜单
+				
+				5.解决点透问题
+					点透事件：pc上的事件比移动端的事件略慢，大概是在300ms左右。
+				
+				6.也阻止了焦点元素的焦点行为(要正常使用：ev.stopPropagation()阻止冒泡) 
+			*/
+		</script>
+		<style>
+			body{
+				margin: 0;
+			}
+			.wrap{
+				height: 4.68rem;
+				position: relative;
+			}
+			.list{
+				padding: 0;
+				margin: 0;
+				width:400%;
+				position: absolute;
+				top:0;
+				left:0;
+				list-style: none;
+				/*overflow: hidden;*/
+			}
+			.list li{
+				float: left;
+				width:15rem;
+			}
+			.list img{
+				width:15rem;
+				display: block;
+			}
+			nav{
+				width:15rem;
+				height: 10px;
+				position: absolute;
+				bottom:5px;
+				z-index: 1;
+				text-align:center;
+			}
+			nav a{
+				width:15px;
+				height: 15px;
+				display: inline-block;
+				background: red;
+				border-radius:50%;
+				vertical-align:top;
+			}
+			nav a.active{
+				background:#fff;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<section class="wrap">
+			<ul class="list">
+				<li>
+					<img src="img/img.jpg" alt="" />
+				</li>
+				<li>
+					<img src="img/img2.jpg" alt="" />
+				</li>
+				<li>
+					<img src="img/img3.jpg" alt="" />
+				</li>
+				<li>
+					<img src="img/img4.jpg" alt="" />
+				</li>
+			</ul>
+			<nav>
+				<a href="javascript:;" class="active"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+				<a href="javascript:;"></a>
+			</nav>
+		</section>
+		
+		<script>
+			var oWrap = document.querySelector(".wrap");
+			var oList = oWrap.querySelector(".list");
+			var a = oWrap.querySelectorAll('a');
+			//一张图片的宽度
+			var w = oWrap.clientWidth;
+			//储存按下时list的left值
+			var listL = 0;
+			//记录按下时鼠标的位置
+			var disX = null;
+			//记录上一个按钮是哪一张
+			var last = 0;
+			//定时器
+			var oTimer = null;
+			oList.innerHTML += oList.innerHTML;
+			//图片的数量
+			var len = oList.children.length;
+			oList.style.width = len * w + 'px';
+			//标记图片是第几张
+			var num = 0;
+			auto();
+			function auto(){
+				if(num == len-1){
+					setTimeout(function(){
+						num = a.length-1;
+						oList.style.transition = null;
+						oList.style.left = -num*w + 'px';
+					},1000)
+				}
+				oTimer = setInterval(function(){
+					num++;
+					oList.style.transition = '1s';
+					oList.style.left = -num*w + 'px';
+					
+					if(num == len-1){
+						setTimeout(function(){
+							num = a.length-1;
+							oList.style.transition = null;
+							oList.style.left = -num*w + 'px';
+						},1000)
+					}
+					
+					setTimeout(function(){
+						a[last].className = '';
+						a[num%a.length].className = 'active';
+						last = num%a.length;
+					},300)
+				},2000)
+			}
+			//为list添加按下，移动，抬起事件绑定函数
+//			注意：在移动端开发的时候，浏览器的模拟器时好时坏，所以我们一般不用on的方式绑定事件函数，要用事件侦听的方式绑定(addEventListener)。
+			oList.addEventListener('touchstart',start)
+			oList.addEventListener('touchmove',move)
+			oList.addEventListener('touchend',end)
+			
+			
+			function start(ev){
+				//清除定时器
+				clearInterval(oTimer);
+				//changedTouches  涉及当前事件的手指的一个列表
+				var ev = ev.changedTouches[0]
+				//移动端的按下时的信息要用page
+				disX = ev.pageX;
+				//因为标记图片时要瞬间到达，所以此刻要将transition置为空
+				oList.style.transition = null;
+				//标记每一张图是第几张
+				num = Math.abs(Math.round(oList.offsetLeft/w));
+				if(num == 0){
+					//让num变为第五张
+					num = a.length;
+					oList.style.left = -num*w + 'px';
+				}else if(num == len-1){
+					//让num变为第四张
+					num = a.length-1;
+					oList.style.left = -num*w + 'px';
+				}
+				//记录按下时list的left值
+				listL = this.offsetLeft;
+			}
+			function move(ev){
+				var ev = ev.changedTouches[0]
+				//移动时改变list的位置
+				oList.style.left = (ev.pageX - disX ) + listL + 'px'
+			}
+			function end(ev){
+				var ev = ev.changedTouches[0];
+				//鼠标松开的时候让图片平滑的过度过去；
+				oList.style.transition = '.5s'
+				//手指抬起时判断图片的位置
+				num = Math.abs(Math.round(oList.offsetLeft/w));
+				//改变图片的位置
+				oList.style.left = -num*w + 'px';
+				//改变对应的按钮的颜色
+				a[last].className = '';
+				a[num%a.length].className = 'active';
+				last = num%a.length;
+				auto();
+			}
+		</script>
+	</body>
+</html>
