@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body,
+			ul,
+			li {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			.bg{
+				background:url("bg1.png") no-repeat;
+			}
+			#list .bg2{
+				background-color:rgba(200,0,0,0.9);
+			}
+			.bg3{
+				background-color:rgba(200,0,0,0.3);
+			}
+			.hover{
+				background-color:rgba(200,0,0,0.5);
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="baidu.css" />
+		<script src="../jquery-3.1.1.js"></script>
+		<script>
+			$(function(){
+//				隔行变色
+				$("#list li:odd").addClass("bg3")
+				//为所有的li添加鼠标移入操作
+				addhover();
+				function addhover(){
+					$("#list").find("li").hover(function(){
+						if(!$(this).hasClass("bg2")){
+							$(this).addClass("hover");
+						}
+					},function(){
+						$(this).removeClass("hover")
+					})
+				}
+				//为所有的li添加鼠标点击操作
+				addEvent();
+				function addEvent(){
+					$("#list").find("li").on("click",function(){
+						console.log(1)
+						$(this).toggleClass("bg2");
+						$("div:first",this).toggleClass("bg");
+						$(".selectAll").addClass("bg");
+						$("#list li").each(function(index,value){
+							if(!$(value).hasClass("bg2")){
+								$(".selectAll").removeClass("bg");
+							}
+						})
+					})
+				}
+			
+				
+				//为全选按钮天剑点击事件绑定函数
+				$(".selectAll").click(function(){
+					$(this).toggleClass("bg");
+					if($(this).hasClass("bg")){
+						$("#list").find("li").addClass("bg2");
+						$("#list").find("li").find("div").addClass("bg");
+					}else{
+						$("#list").find("li").removeClass("bg2");
+						$("#list").find("li").find("div").removeClass("bg");
+					}
+				})
+				//给添加的按钮添加点击事件绑定函数
+				$(".others>span:nth-child(2)").click(function(){
+					$("#text_div").show();
+				})
+				
+				//添加
+				$("#text_div>input:nth-of-type(1)").click(function(){
+					if($("#text_div p:nth-of-type(1) input").val().trim()=== "" || $("#text_div p:nth-of-type(2) input").val().trim() === ""){
+						console.log("输入的不能为空值~~~")
+					}else{
+						var str = $('<li><div></div><span>'+ $("#text_div p:nth-of-type(1) input").val().trim() +'</span><span>'+ $("#text_div p:nth-of-type(2) input").val().trim() +'</span></li>');
+						$('#list').append(str);
+						$("#text_div p:nth-of-type(1) input").val("");
+						$("#text_div p:nth-of-type(2) input").val("");	
+						$("#list li:odd").addClass("bg3");
+						$(".selectAll").removeClass("bg");
+						$("#list").find("li").off("click");
+						addEvent();
+						addhover();
+						$("#text_div").hide();
+					}
+				})
+				$("#text_div>input:nth-of-type(2)").click(function(){
+					$("#text_div p:nth-of-type(1) input").val("");
+					$("#text_div p:nth-of-type(2) input").val("");
+					$("#text_div").hide();
+				})
+				
+				
+				//删除
+				$(".others>span:last").click(function(){
+					if($(".bg2").length === 0){
+						console.log("请输入要删除的元素~~~")
+					}
+					$("#list li").each(function(index,value){
+						if($(value).hasClass("bg2")){
+							$(value).remove();
+						}
+					})
+					$("#list li:odd").addClass("bg3");
+					$("#list li:even").removeClass("bg3");
+					$("#list").find("li").off("click");
+					addEvent();
+					addhover();
+				})
+			})
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="baidu">
+				<ul id="list">
+					<li>
+						<div></div>
+						<span>泡沫</span>
+						<span>邓紫棋</span>
+					</li>
+					<li>
+						<div></div>
+						<span>说爱你</span>
+						<span>蔡依林</span>
+					</li>
+					<li>
+						<div></div>
+						<span>稻香</span>
+						<span>周杰伦</span>
+					</li>
+					<li>
+						<div></div>
+						<span>我的梦</span>
+						<span>张靓颖</span>
+					</li>
+					<li>
+						<div></div>
+						<span>怎么说我不爱你</span>
+						<span>萧敬腾</span>
+					</li>
+					<li>
+						<div>️</div>
+						<span>无处安放</span>
+						<span>白若溪</span>
+					</li>
+				</ul>
+				<div class="select">
+					<span class="selectAll"><span>全选</span></span>
+					<div class="others">
+						<span><em></em>收藏</span>
+						<span><em></em>添加</span>
+						<span><em></em>删除</span>
+					</div>
+				</div>
+				<div id="text_div">
+					<p>歌曲：<input type="text"></p>
+					<p>歌手：<input type="text"></p>
+					<input type="button" value="保存" />
+					<input type="button" value="取消" />
+				</div>
+			</div>
+		</div>
+		<script>
+			/*
+				选择器 odd
+				
+				find()
+
+				toggleClass() addClass() removeClass()
+
+				on()  绑定事件
+
+
+
+				$("<li>123</li>").html(123)
+
+				append
+
+				remove
+
+				添加和删除要保持隔行变色效果
+
+			*/
+
+		</script>
+	</body>
+
+</html>
