@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position:absolute;
+				top:0;
+				left:0;
+			}
+			input{
+				position:absolute;
+				top:0;
+				left:300px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="插件/index.css"/>
+		<script src="jquery-3.1.1.js"></script>
+		<script src="插件/drag.js"></script>
+		<script src="插件/chajian.js"></script>
+		<script>
+			$(function(){
+				$("div").drag();
+				$("input").click(function(){
+					$.dialog2({
+						title:123,
+						content:456
+					});
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<input type="button" value="弹出" />
+	</body>
+</html>
