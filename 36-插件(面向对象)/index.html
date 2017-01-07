@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<style>
+			#div1{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position:absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<script src="jquery-3.1.1.js"></script>
+		<script src="drag.js"></script>
+		<script src="dialog.js"></script>
+		<script type="text/javascript">
+		
+			$(function(){
+//				$("div").drag()
+//				$("div").on("moving",function(){
+//					console.log(1);
+//				})
+
+				$("input").click(function(){
+					$.dialog({
+						title:123,
+						content:456,
+						okFn:function(){
+							return true;
+						}
+					})
+				})
+			})
+			
+			
+		</script>
+	</head>
+	<body>
+<!--		<div id="div1"></div>-->
+		<input type="button" value="弹框" />
+	</body>
+</html>

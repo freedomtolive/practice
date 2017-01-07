@@ -1,4 +1,4 @@
-(function($,document,window,noGlobal){
+;(function($,document,window,noGlobal){
 	$.extend({
 		//弹窗：面向过程(jq)
 		dialog:function(obj){
@@ -132,15 +132,17 @@
 					},false)
 				}
 			}
-			var obj = new Dialog3(options);
-			return obj;	
+			new Dialog3(options);
 		}
 	});
+	
+	
 	$.fn.extend({
 		//拖拽
 		drag:function(){
 			var This = this;
-			$(this).mousedown(function(ev){
+			this.mousedown(function(ev){
+				console.log(this)
 				var disX = ev.pageX - $(this).offset().left;
 				var disY = ev.pageY - $(this).offset().top;
 				$(document).mousemove(function(ev){
@@ -148,8 +150,7 @@
 					This.css("top",ev.pageY-disY);
 				})
 				$(document).mouseup(function(){
-					$(document).off();
-					$(this).off();
+					$(document).off("mousemove mouseup");
 				})
 				
 				return false;
