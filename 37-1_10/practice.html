@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<p>用户名：<input id="userName" type="text" name="user" /><span id="span1"></span></p>
+		<p>手机号码：<input id="phoneNumber" type="text" name="user" /><span id="span2"></span></p>
+		<script src="jq3.js"></script>
+		<script>
+			var oUserName = document.getElementById("userName");
+			var oPhone = document.getElementById("phoneNumber");
+			var oSpan = document.getElementById("span1");
+			var oSpan2 = document.getElementById("span2")
+			
+			function ajax(options){
+				var defaults = {
+					url:'',
+					metherd:"get",
+					data:"",
+					isAsyn:true,
+					success:function(){
+						
+					},
+					error:function(){
+						
+					}
+					
+				}
+				
+				$.extend(defaults,options);
+				//新建一个ajax对象
+				var xhr = new XMLHttpRequest();
+				
+				//如果是get方法，那么要加search值
+				if(defaults.metherd === "get"){
+					defaults.url += "?" + defaults.data;
+				};
+				
+				//链接
+				xhr.open(defaults.metherd,defaults.url,defaults.isAsyn)
+				
+				//完成时执行的函数
+				xhr.onload = function(){
+					if(xhr.status === 200){
+						//成功时执行
+						defaults.success(xhr.responseText)
+					}else{
+						defaults.error(xhr.status,xhr.statusText)
+					}
+				}
+				
+				//发送
+				if(defaults.metherd === "get"){
+					xhr.send();
+				}else if(defaults.metherd === "post"){
+					xhr.setRequestHeader("Content-Type",'application/x-www-form-urlencoded');
+					xhr.send(defaults.data)
+				}
+				
+			}
+			
+			oUserName.onblur = function(){
+				ajax({
+					url:'http://localhost/1_10/php/get1.php',
+					data:"user="+this.value,
+					success:function(data){
+						oSpan.innerHTML = data;
+					},
+					error:function(data){
+						defaults.error(xhr.status,xhr.statusText);
+					}
+				})
+			}
+			
+			oPhone.onblur = function(){
+				ajax({
+					url:'http://127.0.0.1/1-101/php/post.php',
+					metherd:"post",
+					data:"user="+this.value,
+					success:function(data){
+						oSpan2.innerHTML = data;
+					},
+					error:function(data){
+						console.log("出错了")
+					}
+				})
+			}
+			
+		</script>
+	</body>
+</html>
