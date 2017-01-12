@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>招贤纳士-社会招聘</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="../template-native.js"></script>
+		<script type="text/html" id="test">
+			<% for(var i=0;i<list.length;i++){ %>
+			<p class="zp">
+	        	<span><a href="">★ 职位需求：测试工程师【<%= list[i].job %>】</a></span>
+		            <span>需求人数：<%= list[i].pNum %>名</span>
+		         	<span class="date"><%= list[i].data %></span>
+		        </p>
+	      		<p class="yq"><%= list[i].ask %>[<a href="">查看详情</a>]
+	        </p>
+	        <%}%>
+		</script>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="left">
+				<h2>招贤纳士</h2>
+				<ul>
+					<li class="focus"><a href="javascript:;">社会招聘</a></li>
+      				<li><a href="javascript:;">校园招聘</a></li> 
+				</ul>
+			</div>
+			<div class="right">
+				<div class="title">
+					<img src="img/shzp.gif" />
+				</div>
+				<div class="info" id="info1">
+
+					<!-- <p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+				            <span>需求人数：2名</span>
+				         	<span class="date">2013年7月30日</span>
+				        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p>
+		
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			            <span>需求人数：12名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p>
+			
+			      	<p class="zp">
+			        	<span><a href="">★ 职位需求：测试工程师【社会招聘】</a></span>
+			            <span>需求人数：21名</span>
+			         	<span class="date">2013年7月30日</span>
+			        </p>
+			      		<p class="yq">1.计算机或相关专业本科以上学历；2.从事软件测试工作3年及以上；3.具备良好的沟通能力和快速学习能力；4.精通测试策略和方法、测试用例设计；5.熟悉DB2、AIX等平台的基本操作；6.具备2年以上金...[<a href="">查看详情</a>]
+			        </p> -->
+
+				</div>
+				<div class="pages">
+					<span class="prev" id="prev1">
+			        	<a href="javascript:;">
+			            	<img src="img/pre.gif">
+			        	</a>
+			        </span>
+						<span class="next" id="next1">
+			        	<a href="javascript:;">
+			            	<img src="img/next.gif">
+			        	</a>
+			        </span>
+					<p id="page1">
+						<!--<span class="focus">
+				            <a href="javascript:;">1</a>
+			        	</span>
+				        <span>
+				            <a href="javascript:;">2</a>
+				        </span>
+				        <span>
+				            <a href="javascript:;">3</a>
+				        </span> -->
+					</p>
+				</div>
+
+			</div>
+			<div class="clear"></div>
+		</div>
+	</body>
+	<script src="../jq3.js"></script>
+	<script>
+		var hash = window.location.hash.substr(1);
+		console.log(hash)
+		if(!hash){
+			hash = 1;
+		}
+		$.ajax({
+			url:"http://localhost/php/zhaopin.php",
+			data:{
+				type:"world",
+				page:hash,
+			},
+			success:function(data){
+				var data = JSON.parse(data);
+				if(data.list.length === 0){
+                    info.innerHTML = "没有信息"
+            	}else{
+               		renderList(data);
+					createpage(data,"world");
+                }
+				
+			},
+			error:function(data){
+				error(xhr.status,xhr.statusText);
+			}
+		})
+		
+		function renderList(data){
+			var html = template("test",data);
+            info1.innerHTML = html;
+		}
+		
+		function error(xstatus,statusText){
+			console.log(status + "," + statusText)
+		}
+		
+		$('.left ul li:first').click(function(){
+			window.location.hash = 1
+			hash = 1;
+			$('.left ul li').removeClass("focus");
+			$('.left ul li:first').addClass("focus");
+			$.ajax({
+				url:"http://localhost/php/zhaopin.php",
+				data:{
+					type:"world",
+					page:1,
+				},
+				success:function(data){
+					var data = JSON.parse(data);
+					if(data.list.length === 0){
+	                    info.innerHTML = "没有信息"
+	            	}else{
+	               		renderList(data);
+						createpage(data,"world");
+	                }
+				},
+				error:function(data){
+					error(xhr.status,xhr.statusText);
+				}
+			})
+		})
+		
+		$('.left ul li:last').click(function(){
+			window.location.hash = 1
+			hash = 1;
+			$('.left ul li').removeClass("focus");
+			$('.left ul li:last').addClass("focus");
+			$.ajax({
+				url:"http://localhost/php/zhaopin.php",
+				data:{
+					type:"school",
+					page:1,
+				},
+				success:function(data){
+					var data = JSON.parse(data);
+					if(data.list.length === 0){
+                    	info.innerHTML = "没有信息"
+	            	}else{
+	               		renderList(data);
+						createpage(data,"world");
+	                }
+				},
+				error:function(data){
+					error(xhr.status,xhr.statusText);
+				}
+			})
+		})
+		
+		
+		function createpage(data,types){
+			var str2 = '';
+			var num = Math.ceil(data.total/data.num)
+			for(var i=0;i<num;i++){
+				if(i === (hash-1)){
+					str2 += '<span class ="focus"><a href="javascript:;">'+ (i+1) +'</a></span>'
+				}else{
+					str2 += '<span><a href="javascript:;">'+ (i+1) +'</a></span>'
+				}
+			}
+			$("#page1").html(str2);	
+			$("#page1 span").click(function(ev){
+				$("#page1 span").removeClass('focus');
+				$(this).addClass('focus')
+				
+				var index = $(this).index();
+				window.location.hash = index+1;
+				hash = window.location.hash.substr(1);
+				$.ajax({
+					url:"http://localhost/php/zhaopin.php",
+					data:{
+						type:types,
+						page:hash,
+					},
+					success:function(data){
+						var data = JSON.parse(data);
+						if(data.list.length === 0){
+		                    info.innerHTML = "没有信息"
+		            	}else{
+		               		renderList(data);
+							createpage(data,"world");
+		                }
+					},
+					error:function(data){
+						error(xhr.status,xhr.statusText);
+					}
+				})
+			})
+		}
+		
+	</script>
+</html>
