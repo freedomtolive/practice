@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background-color:red;
+				display: none;
+				font-size: 50px;
+				color: #fff;
+			}
+			.show{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<span>0</span>
+		<span>1</span>
+		<span>2</span>
+		<div class="show">0</div>
+		<div>1</div>
+		<div>2</div>
+		
+		<script>
+			var aSpan = document.getElementsByTagName('span');
+			var aDiv = document.getElementsByTagName('div');
+			
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].index = i;
+				aSpan[i].onclick = function(){
+//					点击span的时候改变hash值
+					window.location.hash = this.index;
+				}
+			}
+			
+			//当hash值改变的时候，做一些事情
+			window.onhashchange = function(){
+				for(var i=0;i<aDiv.length;i++){
+					aDiv[i].className = '';
+				}
+				aDiv[window.location.hash.substr(1)].className = 'show';
+			}
+		</script>
+	</body>
+</html>

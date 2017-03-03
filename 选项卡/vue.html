@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#app div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				font:30px/100px "微软雅黑";
+				text-align: center;
+				color:#fff;
+			}
+		</style>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="button" value="按钮1" @click = "tabChanged(1)" />
+			<input type="button" value="按钮2" @click = "tabChanged(2)" />
+			<input type="button" value="按钮3" @click = "tabChanged(3)" />
+			
+			<component :is="current"></component>
+		</div>
+		<script>
+			var custom1 = Vue.component("custom1",{
+				template:`
+					<div>内容1</div>
+				`
+			})
+			var custom2 = Vue.component("custom1",{
+				template:`
+					<div>内容2</div>
+				`
+			})
+			var custom3 = Vue.component("custom1",{
+				template:`
+					<div>内容3</div>
+				`
+			})
+			new Vue({
+				el:"#app",
+				data:{
+					current:custom1
+				},
+				methods:{
+					tabChanged(n){
+						if(n === 1){
+							this.current = custom1
+						}else if(n===2){
+							this.current = custom2
+						}else if(n===3){
+							this.current = custom3
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

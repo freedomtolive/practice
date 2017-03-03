@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1 div{
+				width:100px;
+				height: 100px;
+				background: red;
+				font:50px/100px "微软雅黑";
+				color:#fff;
+				display: none;
+				text-align: center;
+			}
+			.active{
+				background: pink;
+			}
+		</style>
+		<script>
+			window.onload = function(){
+				var t1 = new Tab();
+				t1.init();
+			}
+			//构造函数
+			function Tab(){
+				//对象的属性
+				this.oDiv = document.getElementById("div1");
+				this.aInp = this.oDiv.getElementsByTagName("input");
+				this.aDiv = this.oDiv.getElementsByTagName("div");
+			}
+			//对象的方法~~~初始化
+			Tab.prototype.init = function(){
+				var This = this;
+				for(var i=0;i<this.aInp.length;i++){
+					this.aInp[i].index = i;
+					this.aInp[i].onclick = function(){
+						This.change(this);
+					};
+				}
+			}
+			//对象打的方法~~~点击改变样式
+			Tab.prototype.change = function (obj){
+				for(var i =0;i<this.aDiv.length;i++){
+					this.aInp[i].className = '';
+					this.aDiv[i].style.display = 'none';
+				}
+				obj.className = 'active';
+				this.aDiv[obj.index].style.display = 'block';	
+			}
+//			修改全局对象:
+//				尽量不要出现函数嵌套函数
+//				可以出现全局变量
+//				把onload中不是赋值的语句放到单独的函数中
+			
+//			修改成面向对象：
+	//			全局变量就是属性,
+	//			函数就是方法,
+	//			onload中创建对象
+	//			修改this的指向：尽量使this指向对象，便于维护
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" class="active" value="按钮1" />
+			<input type="button" value="按钮2" />
+			<input type="button" value="按钮3" />
+			<div style="display: block;">1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+	</body>
+</html>

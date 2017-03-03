@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+				background-color:red;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="按钮0" _index=0 />
+		<input type="button" value="按钮1" _index=1 />
+		<input type="button" value="按钮2" _index=2 />
+		<div>div0</div>
+		<div>div1</div>
+		<div>div2</div>
+		
+		<script>
+			var inps = document.getElementsByTagName("input");
+			var divs = document.getElementsByTagName("div");
+			for (var i = 0; i < inps.length; i++) {
+				inps[i].onclick = function(){
+//					alert( this._index )
+//					alert( this.getAttribute("_index") );
+					for (var i = 0; i < divs.length; i++) {
+						divs[i].style.display = "none";
+					}
+					divs[ this.getAttribute("_index") ].style.display = "block";
+				}
+			}
+		</script>
+	</body>
+</html>

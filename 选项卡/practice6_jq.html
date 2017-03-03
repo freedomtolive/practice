@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery/jquery-3.1.1.js"></script>
+		<style>
+			#div1 div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				text-align: center;
+				font:50px/100px "微软雅黑";
+				color:#fff;
+				display:none;
+			}
+			.active{
+				background: pink;
+			}
+		</style>
+		<script>
+			$(function(){
+				//为所有的div添加点击事件绑定函数
+				$('#div1').find("input").on('click',function(){
+					//将div1下面的所有的input的class变为空
+					$('#div1').find("input").attr('class','');
+					//将div1下面的所有的div的display变为none
+					$('#div1').find('div').hide();
+					//为点击的按钮添加activeclass
+					$(this).addClass('active');
+					//将点击的按钮所对应的div（通过索引）出现
+					$('#div1').find('div').eq($(this).index()).show();
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<input class="active" type="button" value="按钮1" />
+			<input type="button" value="按钮2" />
+			<input type="button" value="按钮3" />
+			<div style="display:block;">1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+	</body>
+</html>
