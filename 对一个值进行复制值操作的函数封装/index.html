@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function clone(obj){
+				//首先判断obj是不是对象类型的值
+				if(typeof obj === "object" && obj !== null){
+					//如果是对象类型的值
+					//区分对象还是数组
+					if(Object.prototype.toString.call(obj).slice(8,-1) === "Array"){
+						//如果是数组，新建一个空数组
+						var o = [];
+					}else{
+						//如果是对象，新建一个空对象
+						var o = {};
+					}
+					for(var k in obj){
+						//判断属性
+						if(typeof obj[k] === "object" && obj[k] !== null){
+							//如果属性对应的值为对象，则进行递归操作,并赋值给该属性
+							o[k] = clone(obj[k])
+						}else{
+							//如果不为对象，则进行赋值操作
+							o[k] = obj[k]
+						}
+					}
+				}else{
+					//如果不是对象类型的值
+					return obj;
+				}
+				return o
+			}
+
+			var obj1 = {
+				a:1,
+				b:2,
+				c:{
+					d:3,
+					e:4
+				}
+			}
+
+			console.log(clone(obj1))
+		</script>
+	</body>
+</html>
